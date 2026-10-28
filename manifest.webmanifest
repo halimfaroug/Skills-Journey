@@ -1,0 +1,12 @@
+{
+  "name": "رحلة المهارات",
+  "short_name": "رحلة المهارات",
+  "lang": "ar",
+  "dir": "rtl",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#DFF3FF",
+  "theme_color": "#0B67D1",
+  "description": "تدريب تفاعلي للصفين الثالث والسادس"
+}
