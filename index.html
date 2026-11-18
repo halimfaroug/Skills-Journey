@@ -274,13 +274,13 @@ function gx(s){
   return s.split(/(<div class="passage">[\s\S]*?<\/div>)/).map((seg,i)=>i%2?seg:seg.replace(/[\u0621-\u0652]+/g,tok=>{
     const k=tok.replace(/[\u064B-\u0652]/g,"");
     if(FMK[k])return FMK[k];
-    if(/[\u062A\u0643]\u0650$/.test(tok))return tok.slice(0,-1)+"\u064E";
+    if(/[\u062A\u0643]\u0650$/.test(tok)&&!/^(?:[وفبك]?ال|لل)/.test(k))return tok.slice(0,-1)+"\u064E";
     return tok;})).join("");
 }
 
 /* عدد + معدود بقواعد العربية: 1 واحد، 2 مثنى، 3–10 جمع، 11–99 مفرد منصوب */
-const ARW={"درس":["درس","درسان","دروس","درسًا","درس واحد"],"فصل":["فصل","فصلان","فصول","فصلًا","فصل واحد"],"سؤال":["سؤال","سؤالان","أسئلة","سؤالًا","سؤال واحد"],"محطة":["محطة","محطتان","محطات","محطة","محطة واحدة"],"مدينة":["مدينة","مدينتان","مدن","مدينة","مدينة واحدة"],"محاولة":["محاولة","محاولتان","محاولات","محاولة","محاولة واحدة"],"مهارة":["مهارة","مهارتان","مهارات","مهارة","مهارة واحدة"]};
-function cnt(n,w){n=Number(n)||0;const f=ARW[w],s=n.toLocaleString("en");if(n===1)return f[4];if(n===2)return f[1];const r=n%100;if(r>=3&&r<=10)return s+" "+f[2];if(r>=11)return s+" "+f[3];return s+" "+f[0];}
+const ARW={"درس":["درس","درسان","دروس","درسًا","درس واحد"],"فصل":["فصل","فصلان","فصول","فصلًا","فصل واحد"],"سؤال":["سؤال","سؤالان","أسئلة","سؤالًا","سؤال واحد"],"محطة":["محطة","محطتان","محطات","محطة","محطة واحدة"],"مدينة":["مدينة","مدينتان","مدن","مدينة","مدينة واحدة"],"محاولة":["محاولة","محاولتان","محاولات","محاولة","محاولة واحدة"],"مهارة":["مهارة","مهارتان","مهارات","مهارة","مهارة واحدة"],"يوم":["يوم","يومان","أيام","يومًا","يوم واحد"]};
+function cnt(n,w){n=Number(n)||0;const f=ARW[w],s=n.toLocaleString("en");if(n===0)return s+" "+f[2];if(n===1)return f[4];if(n===2)return f[1];const r=n%100;if(r>=3&&r<=10)return s+" "+f[2];if(r>=11)return s+" "+f[3];return s+" "+f[0];}
 
 /* ======================== الذكاء التعليمي المحلي ======================== */
 const now=()=>Date.now();
@@ -347,7 +347,8 @@ function pickGender(){
   <p class="fine" style="text-align:center;margin-top:14px">يمكنك تغيير ذلك لاحقًا من الشاشة الرئيسية.</p>`,{noBack:true});
 }
 function setGender(x){P.gender=x;save();swap(home)}
-function streakTxt(){const t=today();return P.streak.n&&(P.streak.d===t||P.streak.d===yesterday())?`🔥 ${P.streak.n}`:"🔥 0"}
+function streakN(){const t=today();return P.streak.n&&(P.streak.d===t||P.streak.d===yesterday())?P.streak.n:0}
+function streakTxt(){const n=streakN();return n?`🔥 تدريب متتالٍ: ${cnt(n,"يوم")}`:"🔥 ابدئي سلسلتك اليوم"}
 const dstr=d=>d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0");
 const today=()=>dstr(new Date());const yesterday=()=>{const d=new Date();d.setDate(d.getDate()-1);return dstr(d)};
 
@@ -358,7 +359,7 @@ function home(){
   show(`<button class="infostrip" onclick="go(about)"><span aria-hidden="true">ℹ️</span><span>عن التطبيق · الخصوصية · إخلاء المسؤولية</span><span aria-hidden="true">‹</span></button>${navigator.onLine?"":`<div class="offline-note" role="status">أنتِ الآن دون اتصال؛ الرحلة الأساسية متاحة من النسخة المحفوظة.</div>`}
   ${say("happy",`<h1>رحلة المهارات</h1><p class="muted" style="color:var(--accent);font-weight:800">${APP.tag}</p><p>حدّدي صفك وانطلقي في رحلة منظمة بين دروس كتبك!</p>`)}
   ${scene("ma",pctAll,true)}
-  <div class="chips"><span class="chip">${TR[lv]} ${LEVELS[lv][1]}</span><span class="chip">${streakTxt()} أيام متتالية</span><span class="chip">📚 ${TOTALQ.toLocaleString("en")} سؤال</span></div>
+  <div class="chips"><span class="chip">${TR[lv]} ${LEVELS[lv][1]}</span><span class="chip">${streakTxt()}</span><span class="chip">📚 ${cnt(TOTALQ,"سؤال")}</span></div>
   <div class="stack">${GR.map(g=>{const bs=BOOKS.filter(b=>b.g===g);const tot=bs.reduce((a,b)=>a+lessonsOf(b).length*3,0),got=bs.reduce((a,b)=>a+lessonsOf(b).reduce((x,l)=>x+stars(l.id),0),0);
     return `<button class="big" onclick="go(books,${g})"><span><b>${GN[g]}</b><small>${bs.map(b=>b.n).join(" · ")} · ${cnt(bs.reduce((a,b)=>a+qcount(b),0),"سؤال")}</small><div class="bar"><i style="width:${tot?got/tot*100:0}%"></i></div></span><span class="e" aria-hidden="true">🧭</span></button>`}).join("")}</div>
   <div class="tools">
@@ -449,7 +450,8 @@ function step(first){
   <div id="ai">${aid}</div><div id="fb" aria-live="polite"></div><div id="toast" aria-live="polite"></div>`,{quiz:true});
 }
 function hint(){
-  if(Q.ans||Q.hinted||Q.hints<=0)return;Q.hinted=true;Q.hints--;
+  if(Q.ans||Q.hinted||Q.hints<=0)return;
+  if(Q.list[Q.i].o.length<3){$("#ai").innerHTML=gx(say("think","هذا سؤال من خيارين، فلا تلميح فيه. فكّري جيدًا ثم اختاري!"));return;}Q.hinted=true;Q.hints--;
   const t=Q.list[Q.i];const w=t.o.map((o,j)=>j).filter(j=>t.o[j].id!==t.c);const j=w[Math.floor(Math.random()*w.length)];
   const b=$("#o"+j);b.disabled=true;b.classList.add("gone");$("#ai").innerHTML=gx(say("think","حذفتُ لكِ إجابة خاطئة. فكّري في الباقي!"));
 }
@@ -481,7 +483,7 @@ function finish(){
     extra=`<div class="big-score" aria-label="النجوم">${st(sc)}</div>`}
   else if(Q.mode==="chest"){const old=P.chest[Q.id]||0;if(sc>old)P.chest[Q.id]=sc;xp+=30+sc*10;extra=`<div class="big-score">🎁 ${st(sc)}</div>`+(sc>=1?postcard(CHP[Q.id].c):"")}
   else if(Q.mode==="castle"){const o=P.castle[Q.id];if(!o||s>o.s)P.castle[Q.id]={s,n};xp+=60+sc*20;extra=`<div class="big-score">${r>=0.9?"🥇":r>=0.7?"🥈":r>=0.5?"🥉":"🎯"}</div>`}
-  else if(Q.mode==="daily"){const t=today();if(P.streak.d!==t){P.streak.n=(P.streak.d===yesterday())?P.streak.n+1:1;P.streak.d=t;xp+=20}extra=`<p class="muted" style="text-align:center">🔥 ${P.streak.n} أيام متتالية</p>`}
+  else if(Q.mode==="daily"){const t=today();if(P.streak.d!==t){P.streak.n=(P.streak.d===yesterday())?P.streak.n+1:1;P.streak.d=t;xp+=20}extra=`<p class="muted" style="text-align:center">🔥 تدريب متتالٍ: ${cnt(P.streak.n,"يوم")}</p>`}
   else{extra=`<p class="muted" style="text-align:center">المتبقي في الدفتر: ${mistN()}</p>`}
   P.xp+=xp;save();if(sc>=2||(Q.mode==="castle"&&r>=0.7))burst();
   let weak="";
@@ -522,7 +524,7 @@ function progress(){
   const weak=Object.entries(P.qstats).filter(([,x])=>x.a&&x.o/x.a<.7).length;
   show(`<div class="muted" style="font-weight:700;margin-bottom:6px">${GN[g]}</div><h1>تقرير تقدّمي ذكي</h1>
   <div class="stats"><div><b>${P.xp}</b>نقطة</div><div><b>${st_.a?Math.round(st_.o/st_.a*100):0}%</b>الدقة</div><div><b>${mistN()}</b>دفتر الأخطاء</div><div><b>${due}</b>مراجعة اليوم</div></div>
-  <div class="chips"><span class="chip">🏅 ${LEVELS[lv][1]}</span><span class="chip">${streakTxt()} أيام</span><span class="chip">⭐ ${got}/${tot}</span><span class="chip">📌 ${cnt(weak,"مهارة")} تحتاج دعمًا</span></div>
+  <div class="chips"><span class="chip">🏅 ${LEVELS[lv][1]}</span><span class="chip">${streakTxt()}</span><span class="chip">⭐ ${got}/${tot}</span><span class="chip">📌 ${cnt(weak,"مهارة")} تحتاج دعمًا</span></div>
   <div class="card"><h2>🎯 توصية اليوم</h2><p>${due?`لديك ${cnt(due,"سؤال")} حان وقت مراجعتها. ابدئي من دفتر الأخطاء.`:weak?"تدربي على الأسئلة التي أخطأتِ فيها؛ ستظهر تلقائيًا في المهمة الذكية.":"أجيبي عن مزيد من الأسئلة لتكوين توصية شخصية."}</p><button class="go" onclick="go(daily)">ابدئي المهمة الذكية</button></div>
   <h2>التقدم حسب الكتاب</h2>${bs.map(b=>{const ls=lessonsOf(b),ss=ls.reduce((a,l)=>a+stars(l.id),0),d=ls.filter(l=>stars(l.id)>0).length;return `<div class="row"><span><b>${b.e} ${b.n}</b><small>${d} من ${cnt(ls.length,"درس")} · ${ss}/${ls.length*3} ⭐</small></span></div>`}).join("")}
   <h2 style="margin-top:14px">🏆 الإنجازات</h2>${badges}
