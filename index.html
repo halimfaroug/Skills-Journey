@@ -200,6 +200,69 @@ footer{color:var(--ink2);line-height:1.8}
 @media(prefers-reduced-motion:reduce){.big:hover,.tool:hover,.webar-card:hover{transform:none}}
 
 .offline-note{background:#FFF9E9;color:#604B17;border:1px solid #E7C56B;border-radius:12px;padding:9px 12px;margin:0 0 12px;font-weight:750;text-align:center}.update-note{position:fixed;inset:auto 12px 12px;z-index:20;background:#12325B;color:#fff;border-radius:14px;padding:12px 14px;box-shadow:0 8px 24px rgba(18,50,91,.25);font-weight:750;text-align:center}.update-note button{margin-inline-start:8px;border:0;border-radius:8px;padding:5px 9px;font:inherit;font-weight:850;color:#12325B;background:#fff}
+
+/* ===== حالات الإجابة: واضحة وقوية، لا تعتمد على اللون وحده ===== */
+.opt:disabled{opacity:1;cursor:default}
+.opt:disabled:not(.good):not(.wrong){opacity:.55}
+.opt.gone:disabled:not(.good){opacity:.35}
+.opt:disabled:not(.good):not(.wrong):hover{background:var(--opt-bg,#fff);border-color:var(--opt-line,#B8CCDF)}
+.opt.good,.opt.good:hover,.opt.good:disabled{background:#138A5B;border-color:#0E6E48;color:#fff;box-shadow:0 3px 0 #0B5A3A;opacity:1}
+.opt.wrong,.opt.wrong:hover,.opt.wrong:disabled{background:#B42318;border-color:#8E1B12;color:#fff;box-shadow:0 3px 0 #7A160F;opacity:1}
+.opt.good .option-letter{background:#fff;color:#138A5B}
+.opt.wrong .option-letter{background:#fff;color:#B42318}
+.opt.good::after,.opt.wrong::after{margin-inline-start:auto;font-size:1.35em;font-weight:900;line-height:1;padding-inline-start:8px}
+.opt.good::after{content:"✓"}
+.opt.wrong::after{content:"✗"}
+.opt.good .frac>span:first-child,.opt.wrong .frac>span:first-child{border-color:#fff}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+
+/* ===== العناصر المقفلة: تبدو مقفلة لكن نصّها مقروء ===== */
+.stamp.off{opacity:1;filter:none;border-style:dashed;color:var(--ink2)}
+.stamp.off span{filter:grayscale(1);opacity:.45}
+.achievement.locked{opacity:1;filter:none;border-style:dashed}
+.achievement.locked .badge{filter:grayscale(1);opacity:.45}
+.achievement.locked b,.achievement.locked small{color:var(--ink2)}
+.chest.locked,.castle.locked{filter:none;color:var(--ink2);border-style:dashed}
+.chest.locked .em,.castle.locked .em{filter:grayscale(1);opacity:.6}
+/* ===== الوضع الداكن: ألوان كاملة للمكوّنات ===== */
+@media (prefers-color-scheme: dark){
+:root:not([data-theme="light"]) body{background:linear-gradient(180deg,#0B1E3A 0%,#0F2C52 100%);color:#EAF4FF}
+:root:not([data-theme="light"]) .top{background:rgba(11,30,58,.9);border-color:#25456F}
+:root:not([data-theme="light"]) .card,:root:not([data-theme="light"]) .bubble,:root:not([data-theme="light"]) .big,:root:not([data-theme="light"]) .tool,:root:not([data-theme="light"]) .chip,:root:not([data-theme="light"]) .go.alt,:root:not([data-theme="light"]) .quiz-meta,:root:not([data-theme="light"]) .setting-row,:root:not([data-theme="light"]) .infostrip,:root:not([data-theme="light"]) .pill,:root:not([data-theme="light"]) .row,:root:not([data-theme="light"]) .skill-card,:root:not([data-theme="light"]) .achievement,:root:not([data-theme="light"]) .city,:root:not([data-theme="light"]) .castle,:root:not([data-theme="light"]) .part,:root:not([data-theme="light"]) .chest{background:#13294A;border-color:#2C4E7A;color:#EAF4FF;box-shadow:0 4px 12px rgba(0,0,0,.25)}
+:root:not([data-theme="light"]) .opt:not(.good):not(.wrong){--opt-bg:#13294A;--opt-line:#2C4E7A;background:#13294A;border-color:#2C4E7A;color:#EAF4FF}
+:root:not([data-theme="light"]) .opt:not(.good):not(.wrong):not(:disabled):hover{background:#183257;border-color:#6FB5FF}
+:root:not([data-theme="light"]) .opt:not(.good):not(.wrong) .option-letter{background:#1E3D66;color:#CFE6FF}
+:root:not([data-theme="light"]) .go.alt{box-shadow:0 3px 0 #0A1A33}
+:root:not([data-theme="light"]) .bar{background:#22406A}
+:root:not([data-theme="light"]) .scene{border-color:#2C4E7A}
+:root:not([data-theme="light"]) .feedback.ok{background:#0F3A2B;color:#B9F3DB;border-color:#1F7A55}
+:root:not([data-theme="light"]) .feedback.no{background:#3D1A1A;color:#FFC9C2;border-color:#8E2B22}
+:root:not([data-theme="light"]) .learn,:root:not([data-theme="light"]) .offline-note{background:#2E2712;color:#F3E2B0;border-color:#7A6630}
+:root:not([data-theme="light"]) .learn p{color:#F3E2B0}
+:root:not([data-theme="light"]) .chest,:root:not([data-theme="light"]) .castle,:root:not([data-theme="light"]) .infobar{color:#EAF4FF}
+:root:not([data-theme="light"]) .brand{color:#CFE6FF}
+:root:not([data-theme="light"]) .extra h2,:root:not([data-theme="light"]) .setting-row>span:first-child small,:root:not([data-theme="light"]) .muted,:root:not([data-theme="light"]) .fine{color:#A9C2DE}
+:root:not([data-theme="light"]) .update-note{background:#EAF4FF;color:#0B1E3A}
+}
+
+:root[data-theme="dark"] body{background:linear-gradient(180deg,#0B1E3A 0%,#0F2C52 100%);color:#EAF4FF}
+:root[data-theme="dark"] .top{background:rgba(11,30,58,.9);border-color:#25456F}
+:root[data-theme="dark"] .card,:root[data-theme="dark"] .bubble,:root[data-theme="dark"] .big,:root[data-theme="dark"] .tool,:root[data-theme="dark"] .chip,:root[data-theme="dark"] .go.alt,:root[data-theme="dark"] .quiz-meta,:root[data-theme="dark"] .setting-row,:root[data-theme="dark"] .infostrip,:root[data-theme="dark"] .pill,:root[data-theme="dark"] .row,:root[data-theme="dark"] .skill-card,:root[data-theme="dark"] .achievement,:root[data-theme="dark"] .city,:root[data-theme="dark"] .castle,:root[data-theme="dark"] .part,:root[data-theme="dark"] .chest{background:#13294A;border-color:#2C4E7A;color:#EAF4FF;box-shadow:0 4px 12px rgba(0,0,0,.25)}
+:root[data-theme="dark"] .opt:not(.good):not(.wrong){--opt-bg:#13294A;--opt-line:#2C4E7A;background:#13294A;border-color:#2C4E7A;color:#EAF4FF}
+:root[data-theme="dark"] .opt:not(.good):not(.wrong):not(:disabled):hover{background:#183257;border-color:#6FB5FF}
+:root[data-theme="dark"] .opt:not(.good):not(.wrong) .option-letter{background:#1E3D66;color:#CFE6FF}
+:root[data-theme="dark"] .go.alt{box-shadow:0 3px 0 #0A1A33}
+:root[data-theme="dark"] .bar{background:#22406A}
+:root[data-theme="dark"] .scene{border-color:#2C4E7A}
+:root[data-theme="dark"] .feedback.ok{background:#0F3A2B;color:#B9F3DB;border-color:#1F7A55}
+:root[data-theme="dark"] .feedback.no{background:#3D1A1A;color:#FFC9C2;border-color:#8E2B22}
+:root[data-theme="dark"] .learn,:root[data-theme="dark"] .offline-note{background:#2E2712;color:#F3E2B0;border-color:#7A6630}
+:root[data-theme="dark"] .learn p{color:#F3E2B0}
+:root[data-theme="dark"] .chest,:root[data-theme="dark"] .castle,:root[data-theme="dark"] .infobar{color:#EAF4FF}
+:root[data-theme="dark"] .brand{color:#CFE6FF}
+:root[data-theme="dark"] .extra h2,:root[data-theme="dark"] .setting-row>span:first-child small,:root[data-theme="dark"] .muted,:root[data-theme="dark"] .fine{color:#A9C2DE}
+:root[data-theme="dark"] .update-note{background:#EAF4FF;color:#0B1E3A}
 </style>
 
 </head>
@@ -516,7 +579,7 @@ function ans(k){
   else{Q.combo=0;P.mist[t.key]=Date.now()}
   recordAnswer(t,ok);
   save();const hb=$("#bb");if(hb)hb.disabled=true;
-  t.o.forEach((o,j)=>{const b=$("#o"+j);b.disabled=true;if(o.id===t.c)b.classList.add("good");else if(j===k)b.classList.add("wrong")});
+  t.o.forEach((o,j)=>{const b=$("#o"+j);b.disabled=true;if(o.id===t.c){b.classList.add("good");b.insertAdjacentHTML("beforeend",'<span class="sr">، الإجابة الصحيحة</span>')}else if(j===k){b.classList.add("wrong");b.insertAdjacentHTML("beforeend",'<span class="sr">، إجابتك غير صحيحة</span>')}});
   const explanation=qExplanation(t);const tip=explanation?`<div class="learn"><b>🤖 ${ok?"شرح الإجابة":"تفسير السؤال"}</b><p>${explanation}</p></div>`:"";
   const correctText=t.o.find(o=>o.id===t.c)?.text||"";
   $("#fb").innerHTML=gx(`<div class="feedback ${ok?"ok":"no"}">${ok?(Q.combo>=3?"رائع! 🔥 سلسلة إجابات صحيحة":"أحسنتِ! إجابة صحيحة."):"ليست صحيحة. الإجابة الصحيحة: <span dir=\"auto\">"+correctText+"</span>"}</div>${tip}<button class="go" onclick="Q.i++;step()">${Q.i===Q.list.length-1?"النتيجة":"السؤال التالي"}</button><button class="linkbtn" type="button" onclick="reportQuestion()">⚑ الإبلاغ عن مشكلة في السؤال</button>`);
