@@ -164,11 +164,11 @@ main{padding-top:12px}
 @media print{.top,.go,.tools,#back{display:none!important}body{background:#fff}main{padding:0}}
 
 /* الإصدار التفاعلي الموسّع */
-.skill-grid{display:grid;gap:10px;margin:12px 0}.skill-card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:10px 12px}.skill-card b{display:flex;justify-content:space-between;gap:8px}.skill-card small{color:var(--ink2)}.skill-card .bar{margin-top:7px}.quick-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.quick-grid .go{font-size:16px;margin-top:0}.achievement{display:flex;align-items:center;gap:10px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:10px;margin-bottom:8px}.achievement .badge{font-size:28px}.achievement.locked{opacity:.5;filter:grayscale(.8)}.setting-row{display:flex;justify-content:space-between;align-items:center;gap:10px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:10px 12px;margin:8px 0}.setting-row .pill{min-width:48px}.extra{margin-top:18px}.extra h2{font-size:1rem;margin:0 0 8px;color:var(--muted,#64748b)}a.big{text-decoration:none;color:inherit}.extra-app{border-style:dashed}.setting-row>span:first-child{display:flex;flex-direction:column;gap:2px}.setting-row>span:first-child small{color:var(--muted,#64748b);font-size:.85em}.setting-row>span:last-child{display:flex;flex-wrap:wrap;gap:6px;justify-content:flex-end}.review-due{border-color:var(--sun);background:var(--sand)}
+.skill-grid{display:grid;gap:10px;margin:12px 0}.skill-card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:10px 12px}.skill-card b{display:flex;justify-content:space-between;gap:8px}.skill-card small{color:var(--ink2)}.skill-card .bar{margin-top:7px}.quick-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.quick-grid .go{font-size:16px;margin-top:0}.achievement{display:flex;align-items:center;gap:10px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:10px;margin-bottom:8px}.achievement .badge{font-size:28px}.achievement.locked{opacity:.5;filter:grayscale(.8)}.setting-row{display:flex;justify-content:space-between;align-items:center;gap:10px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:10px 12px;margin:8px 0}.setting-row .pill{min-width:48px}.frac{display:inline-flex;flex-direction:column;align-items:center;vertical-align:middle;line-height:1.05;margin:0 .15em;font-size:.92em}.frac>span:first-child{border-bottom:2px solid currentColor;padding:0 .2em .05em}.frac>span:last-child{padding:.05em .2em 0}.nums sup{font-size:.7em}.expr{white-space:nowrap}.q .nums,.q .expr{max-width:100%}.extra{margin-top:18px}.extra h2{font-size:1rem;margin:0 0 8px;color:var(--muted,#64748b)}a.big{text-decoration:none;color:inherit}.extra-app{border-style:dashed}.setting-row>span:first-child{display:flex;flex-direction:column;gap:2px}.setting-row>span:first-child small{color:var(--muted,#64748b);font-size:.85em}.setting-row>span:last-child{display:flex;flex-wrap:wrap;gap:6px;justify-content:flex-end}.review-due{border-color:var(--sun);background:var(--sand)}
 :root[data-font="large"]{font-size:19px}:root[data-font="xl"]{font-size:21px}
 @media(max-width:420px){.quick-grid{grid-template-columns:1fr}.stats{grid-template-columns:repeat(2,1fr)}}
 
-.mathrtl{direction:rtl;unicode-bidi:isolate;display:inline-block;white-space:nowrap}.q-instruction{direction:rtl;unicode-bidi:isolate}
+.mathrtl{direction:rtl;unicode-bidi:isolate;display:inline;white-space:normal}.q-instruction{direction:rtl;unicode-bidi:isolate}
 /* ======================== طبقة التصميم المحسّنة ======================== */
 :root{--brand:#0B67D1;--brand-deep:#084B9B;--brand-soft:#EAF4FF;--focus:#F59E0B;--success:#138A5B;--danger:#B42318;--ink:#12325B;--ink2:#52657D;--card:#FFFFFF;--line:#C9D8E8;--surface:#F5FAFF}
 body{background:linear-gradient(180deg,#EAF7FF 0%,#D8F0FF 100%);color:var(--ink);letter-spacing:0;line-height:1.75}
@@ -231,7 +231,7 @@ function normalizeProgress(raw){
     xp:num(src.xp),stats:{a:num(stats.a),o:num(stats.o)},
     streak:{d:typeof streak.d==="string"?streak.d:"",n:num(streak.n)},
     qstats:map("qstats"),review:map("review"),daily:{d:typeof daily.d==="string"?daily.d:"",done:num(daily.done)},ach:map("ach"),
-    settings:{theme:["auto","light","dark"].includes(settings.theme)?settings.theme:"auto",font:["normal","large","xl"].includes(settings.font)?settings.font:"normal"}};
+    settings:{theme:["auto","light","dark"].includes(settings.theme)?settings.theme:"auto",font:["normal","large","xl"].includes(settings.font)?settings.font:"normal",digits:settings.digits==="en"?"en":"ar"}};
 }
 let P={};try{P=normalizeProgress(JSON.parse(localStorage.getItem("skj2")||"{}"))}catch(e){P=normalizeProgress({})}
 const save=()=>{try{localStorage.setItem("skj2",JSON.stringify(P))}catch(e){}};
@@ -292,8 +292,44 @@ function qExplanation(t){return typeof t.explanation==="string"?t.explanation.tr
 function adaptiveIndexes(l){const arr=l.q.map((q,i)=>({i,q,st:qstat(q.id)}));const due=new Set(dueKeys().map(k=>k.split("#")[0]));arr.sort((x,y)=>{const xd=due.has(x.q.id)?0:1,yd=due.has(y.q.id)?0:1;if(xd!==yd)return xd-yd;const xa=x.st.a?x.st.o/x.st.a:-1,ya=y.st.a?y.st.o/y.st.a:-1;return xa-ya||Math.random()-.5});return arr.map(x=>x.i)}
 function personalDailyIds(){const all=BOOKS.filter(b=>b.g===(P.grade||GR[0])).flatMap(lessonsOf);const due=new Set(dueKeys());const weak=[];all.forEach(l=>l.q.forEach((q,i)=>{const st=qstat(q.id),key=l.id+"#"+i;if(due.has(key)||(st.a&&st.o/st.a<.7))weak.push([l.id,i])}));const base=weak.length?weak:all.flatMap(l=>l.q.map((_,i)=>[l.id,i]));return sh(base).slice(0,5).map(x=>mkQ(x[0],x[1]))}
 function achievements(){const st=P.stats;return [{id:"first",i:"🌱",n:"أول خطوة",d:"أجيبي عن أول سؤال",ok:st.a>=1},{id:"ten",i:"🎯",n:"عشر إجابات",d:"أجيبي عن 10 أسئلة",ok:st.a>=10},{id:"accurate",i:"🏹",n:"عين الصقر",d:"حققي دقة 80% بعد 20 سؤالًا",ok:st.a>=20&&st.o/st.a>=.8},{id:"streak",i:"🔥",n:"سلسلة مستمرة",d:"حافظي على يومين متتاليين",ok:P.streak.n>=2},{id:"review",i:"🧠",n:"مراجعة ذكية",d:"راجعي سؤالًا من دفتر الأخطاء",ok:Object.values(P.review).some(x=>x.last==="ok")},{id:"explorer",i:"🗺️",n:"مستكشفة المهارات",d:"أكملي 10 محطات",ok:Object.keys(P.stars).length>=10}].map(x=>({...x,unlocked:x.ok}))}
-function applySettings(){const r=document.documentElement;const st=P.settings||{};if(st.theme&&st.theme!=="auto")r.dataset.theme=st.theme;else delete r.dataset.theme;r.dataset.font=st.font||"normal"}
-function settings(){const st=P.settings||{};show(`<h1>⚙️ تخصيص الرحلة</h1><p class="muted">اختاري ما يساعدك على التركيز والقراءة.</p><div class="setting-row"><span><b>المظهر</b><small>تلقائي أو فاتح أو داكن</small></span><span><button class="pill" onclick="P.settings.theme='light';applySettings();save();settings()">فاتح</button><button class="pill" onclick="P.settings.theme='dark';applySettings();save();settings()">داكن</button><button class="pill" onclick="P.settings.theme='auto';applySettings();save();settings()">تلقائي</button></span></div><div class="setting-row"><span><b>حجم الخط</b><small>مفيد للقراءة المريحة</small></span><span><button class="pill" onclick="P.settings.font='normal';applySettings();save();settings()">عادي</button><button class="pill" onclick="P.settings.font='large';applySettings();save();settings()">كبير</button><button class="pill" onclick="P.settings.font='xl';applySettings();save();settings()">أكبر</button></span></div><div class="card"><h2>🔊 وصول أفضل</h2><p>يدعم التطبيق لوحة المفاتيح، وتباين الألوان، والقراءة النصية في الجهاز، ويقلل الحركة عند تفعيل إعداد تقليل الحركة في النظام.</p></div><button class="go alt" onclick="back()">رجوع</button>`)}
+/* أرقام الكتاب المدرسي: ١٢٣ واتجاه من اليمين إلى اليسار (يمكن التبديل إلى 123 من «تخصيص») */
+const AD="٠١٢٣٤٥٦٧٨٩",SUPM={"⁰":"0","¹":"1","²":"2","³":"3","⁴":"4","⁵":"5","⁶":"6","⁷":"7","⁸":"8","⁹":"9"};
+const numMode=()=>(P.settings&&P.settings.digits)==="en"?"en":"ar";
+const toAD=s=>s.replace(/(\d)\.(\d)/g,"$1٫$2").replace(/\d/g,d=>AD[d]).replace(/%/g,"٪");
+const escH=s=>s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+const fracH=(a,b)=>`<span class="frac" role="math" aria-label="${a} على ${b}"><span>${a}</span><span>${b}</span></span>`;
+function numHTML(seg,iso){
+  let h=escH(seg);
+  if(iso)h=h.replace(/([-−])?(\d+)\s*\/\s*(\d+)/g,(m,s,a,b)=>s?`<bdi dir="ltr">−${fracH(a,b)}</bdi>`:fracH(a,b));
+  h=h.replace(/(^|[\s(=:،])[-−](\d+(?:\.\d+)?)(?![\d\/])/g,(m,p,n)=>`${p}<bdi dir="ltr">−${n}</bdi>`);
+  h=h.replace(/[⁰¹²³⁴⁵⁶⁷⁸⁹]+/g,m=>"<sup>"+[...m].map(c=>SUPM[c]).join("")+"</sup>");
+  h=h.replace(/(<[^>]+>)|([^<]+)/g,(m,tag,txt)=>tag||toAD(txt));
+  return iso?`<span class="expr">${h}</span>`:h;
+}
+const NUMRX=/[0-9⁦-⁩⁰¹²³⁴⁵⁶⁷⁸⁹%]/;
+function arabizeText(n){
+  const s=n.nodeValue;if(!s||!NUMRX.test(s))return;
+  const p=n.parentNode;if(!p||p.closest&&p.closest("script,style,textarea,[data-latin]"))return;
+  if(!/[⁦\/⁰¹²³⁴⁵⁶⁷⁸⁹]|(^|[\s(=:،])[-−]\d/.test(s)){n.nodeValue=toAD(s.replace(/[⁦-⁩]/g,""));return;}
+  const html=s.split(/(⁦[^⁩]*⁩)/).map(x=>x.startsWith("⁦")?numHTML(x.replace(/[⁦-⁩]/g,""),true):numHTML(x.replace(/[⁦-⁩]/g,""),false)).join("");
+  const w=document.createElement("span");w.className="nums";w.innerHTML=html;n.replaceWith(w);
+}
+function arabizeIn(root){
+  if(numMode()!=="ar"||!root)return;
+  if(root.nodeType===3){arabizeText(root);return;}
+  if(root.nodeType!==1)return;
+  const tw=document.createTreeWalker(root,NodeFilter.SHOW_TEXT),list=[];while(tw.nextNode())list.push(tw.currentNode);
+  list.forEach(arabizeText);
+}
+let numObs=null;
+function startNumObserver(){
+  if(numObs||typeof MutationObserver==="undefined")return;
+  numObs=new MutationObserver(ms=>{if(numMode()!=="ar")return;ms.forEach(m=>{if(m.type==="characterData")arabizeText(m.target);else m.addedNodes.forEach(arabizeIn)})});
+  numObs.observe(document.body,{subtree:true,childList:true,characterData:true});
+  arabizeIn(document.body);
+}
+function applySettings(){const r=document.documentElement;const st=P.settings||{};if(st.theme&&st.theme!=="auto")r.dataset.theme=st.theme;else delete r.dataset.theme;r.dataset.font=st.font||"normal";if(document.body){startNumObserver();if(numMode()==="ar")arabizeIn(document.body)}}
+function settings(){const st=P.settings||{};show(`<h1>⚙️ تخصيص الرحلة</h1><p class="muted">اختاري ما يساعدك على التركيز والقراءة.</p><div class="setting-row"><span><b>المظهر</b><small>تلقائي أو فاتح أو داكن</small></span><span><button class="pill" onclick="P.settings.theme='light';applySettings();save();settings()">فاتح</button><button class="pill" onclick="P.settings.theme='dark';applySettings();save();settings()">داكن</button><button class="pill" onclick="P.settings.theme='auto';applySettings();save();settings()">تلقائي</button></span></div><div class="setting-row"><span><b>حجم الخط</b><small>مفيد للقراءة المريحة</small></span><span><button class="pill" onclick="P.settings.font='normal';applySettings();save();settings()">عادي</button><button class="pill" onclick="P.settings.font='large';applySettings();save();settings()">كبير</button><button class="pill" onclick="P.settings.font='xl';applySettings();save();settings()">أكبر</button></span></div><div class="setting-row"><span><b>الأرقام</b><small>كما في الكتاب المدرسي، أو أرقام <span data-latin>123</span></small></span><span><button class="pill" onclick="P.settings.digits='ar';save();settings()">١٢٣ كما في الكتاب</button><button class="pill" data-latin onclick="P.settings.digits='en';save();location.reload()">123</button></span></div><div class="card"><h2>🔊 وصول أفضل</h2><p>يدعم التطبيق لوحة المفاتيح، وتباين الألوان، والقراءة النصية في الجهاز، ويقلل الحركة عند تفعيل إعداد تقليل الحركة في النظام.</p></div><button class="go alt" onclick="back()">رجوع</button>`)}
 function skillMap(){const g=P.grade||GR[0],bs=BOOKS.filter(b=>b.g===g),stats={};bs.flatMap(lessonsOf).forEach(l=>{const k=skillOf(l);stats[k]=stats[k]||{a:0,o:0,lessons:0};stats[k].lessons++;l.q.forEach(q=>{const x=qstat(q.id);stats[k].a+=x.a;stats[k].o+=x.o})});const rows=Object.entries(stats).map(([k,v])=>{const pct=v.a?Math.round(v.o/v.a*100):0;return `<div class="skill-card"><b><span>${k}</span><span>${pct}%</span></b><small>${cnt(v.a,"محاولة")} · ${cnt(v.lessons,"درس")}</small><div class="bar"><i style="width:${pct}%"></i></div></div>`}).join("");show(`<h1>🧭 خريطة المهارات</h1><p class="muted">تتحدث الخريطة تلقائيًا حسب إجاباتك، وتُظهر أين تحتاجين إلى تدريب إضافي.</p><div class="skill-grid">${rows||'<p class="muted">ابدئي بالتدريب لتظهر خريطتك.</p>'}</div><button class="go alt" onclick="back()">رجوع</button>`)}
 function exportProgress(){const blob=new Blob([JSON.stringify({app:APP.name,version:APP.ver,exported:new Date().toISOString(),progress:P},null,2)],{type:"application/json"});const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="رحلة-المهارات-تقدمي.json";a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000)}
  function importProgress(){const input=document.createElement("input");input.type="file";input.accept="application/json";input.onchange=()=>{const f=input.files?.[0];if(!f)return;if(f.size>5*1024*1024){alert("ملف التقدم كبير جدًا.");return}const r=new FileReader();r.onload=()=>{try{const d=JSON.parse(r.result);if(!d.progress||typeof d.progress!=="object"||Array.isArray(d.progress))throw 0;P=normalizeProgress(d.progress);save();applySettings();progress()}catch(e){alert("تعذر استيراد ملف التقدم. تأكدي أنه صادر من رحلة المهارات.")}};r.readAsText(f)};input.click()}
