@@ -349,7 +349,7 @@ function gx(s){
 }
 
 /* عدد + معدود بقواعد العربية: 1 واحد، 2 مثنى، 3–10 جمع، 11–99 مفرد منصوب */
-const ARW={"درس":["درس","درسان","دروس","درسًا","درس واحد"],"فصل":["فصل","فصلان","فصول","فصلًا","فصل واحد"],"سؤال":["سؤال","سؤالان","أسئلة","سؤالًا","سؤال واحد"],"محطة":["محطة","محطتان","محطات","محطة","محطة واحدة"],"مدينة":["مدينة","مدينتان","مدن","مدينة","مدينة واحدة"],"محاولة":["محاولة","محاولتان","محاولات","محاولة","محاولة واحدة"],"مهارة":["مهارة","مهارتان","مهارات","مهارة","مهارة واحدة"],"يوم":["يوم","يومان","أيام","يومًا","يوم واحد"]};
+const ARW={"درس":["درس","درسان","دروس","درسًا","درس واحد"],"فصل":["فصل","فصلان","فصول","فصلًا","فصل واحد"],"سؤال":["سؤال","سؤالان","أسئلة","سؤالًا","سؤال واحد"],"محطة":["محطة","محطتان","محطات","محطة","محطة واحدة"],"مدينة":["مدينة","مدينتان","مدن","مدينة","مدينة واحدة"],"محاولة":["محاولة","محاولتان","محاولات","محاولة","محاولة واحدة"],"مهارة":["مهارة","مهارتان","مهارات","مهارة","مهارة واحدة"],"يوم":["يوم","يومان","أيام","يومًا","يوم واحد"],"مجموعة":["مجموعة","مجموعتان","مجموعات","مجموعة","مجموعة واحدة"]};
 function cnt(n,w){n=Number(n)||0;const f=ARW[w],s=n.toLocaleString("en");if(n===0)return s+" "+f[2];if(n===1)return f[4];if(n===2)return f[1];const r=n%100;if(r>=3&&r<=10)return s+" "+f[2];if(r>=11)return s+" "+f[3];return s+" "+f[0];}
 
 /* ======================== الذكاء التعليمي المحلي ======================== */
@@ -359,6 +359,34 @@ const skillOf=l=>{const t=(l.t||"").toLowerCase();const b=(LES[l.id]?.bk?.n||"")
 const dueKeys=()=>Object.entries(P.review).filter(([,v])=>v&&v.due<=now()).map(([k])=>k);
 function recordAnswer(t,ok){const st=P.qstats[t.id]||{a:0,o:0};st.a++;if(ok)st.o++;P.qstats[t.id]=st;const key=t.key||t.id;const old=P.review[key]||{interval:0};P.review[key]={due:now()+(ok?Math.max(86400000,(old.interval||1)*2*86400000):86400000),interval:ok?Math.min((old.interval||1)*2,30):1,last:ok?"ok":"wrong"};if(!ok)P.mist[key]=now();}
 function qExplanation(t){return typeof t.explanation==="string"?t.explanation.trim():""}
+/* شرح محسوب لأسئلة الحساب المباشرة؛ يُعرض فقط إذا طابق الإجابة المعتمدة */
+function mathExplanation(t){
+  const L="⁦",R="⁩",n=s=>Number(String(s).replace(/,/g,"")),f=x=>Number.isInteger(x)?String(x):String(+x.toFixed(4));
+  const p=String(t.q||"").replace(/[⁦-⁩]/g,"").replace(/-/g,"−").trim();
+  const ct=(t.o.find(o=>o.id===t.c)||{}).text;if(ct==null)return "";
+  const cv=n(String(ct).replace(/[⁦-⁩]/g,"").trim());if(!Number.isFinite(cv))return "";
+  const E=(s)=>L+s+R;
+  let m=p.match(/^(?:ما )?(?:ناتج|احسب|أوجد ناتج)\s*:?\s*(\d[\d,]*)\s*([×÷−+])\s*(\d[\d,]*)\s*(?:=\s*(?:\?|؟|_+|…)?)?\s*(?:هو)?\s*[:؟?]?\s*$/);
+  if(m){const a=n(m[1]),op=m[2],b=n(m[3]);const r=op==="×"?a*b:op==="÷"?(b?a/b:NaN):op==="−"?a-b:a+b;if(!(Math.abs(r-cv)<1e-9))return "";
+    if(op==="×")return `${E(`${f(a)} × ${f(b)} = ${f(r)}`)}، أي ${Number.isInteger(a)&&a>0?cnt(a,"مجموعة"):f(a)+" مجموعات"} في كل منها ${f(b)}.`;
+    if(op==="÷")return `${E(`${f(a)} ÷ ${f(b)} = ${f(r)}`)}، لأن ${E(`${f(r)} × ${f(b)} = ${f(a)}`)}.`;
+    if(op==="−")return `${E(`${f(a)} − ${f(b)} = ${f(r)}`)}. وللتحقق نجمع: ${E(`${f(r)} + ${f(b)} = ${f(a)}`)}.`;
+    return `${E(`${f(a)} + ${f(b)} = ${f(r)}`)}. وللتحقق نطرح: ${E(`${f(r)} − ${f(b)} = ${f(a)}`)}.`;}
+  m=p.match(/^(?:ما العدد الناقص\s*[؟?]\s*)?(\d[\d,]*|_+)\s*([×÷−+])\s*(\d[\d,]*|_+)\s*=\s*(\d[\d,]*|_+)\s*[؟?]?$/);
+  if(!m)return "";const blank=[m[1],m[3],m[4]].map(x=>/_/.test(x));if(blank.filter(Boolean).length!==1)return "";
+  const op=m[2];let a=blank[0]?cv:n(m[1]),b=blank[1]?cv:n(m[3]),c=blank[2]?cv:n(m[4]);
+  const ok=op==="×"?a*b===c:op==="÷"?(b!==0&&Math.abs(a/b-c)<1e-9):op==="−"?a-b===c:a+b===c;if(!ok)return "";
+  const full=E(`${f(a)} ${op} ${f(b)} = ${f(c)}`);
+  const how={"×":blank[2]?"":`نستعمل القسمة: ${E(`${f(c)} ÷ ${f(blank[0]?b:a)} = ${f(cv)}`)}`,"÷":blank[0]?`نستعمل الضرب: ${E(`${f(c)} × ${f(b)} = ${f(a)}`)}`:blank[1]?`نقسم: ${E(`${f(a)} ÷ ${f(c)} = ${f(b)}`)}`:"","+":blank[2]?"":`نستعمل الطرح: ${E(`${f(c)} − ${f(blank[0]?b:a)} = ${f(cv)}`)}`,"−":blank[0]?`نستعمل الجمع: ${E(`${f(c)} + ${f(b)} = ${f(a)}`)}`:blank[1]?`نطرح: ${E(`${f(a)} − ${f(c)} = ${f(b)}`)}`:""}[op];
+  return `${how?how+". ":""}فتكون الجملة كاملة: ${full}.`;
+}
+/* ما يُعرض بعد الإجابة: شرح السؤال، أو شرح محسوب، أو (عند الخطأ فقط) تذكير من الدرس */
+function feedbackHelp(t,ok){
+  const own=qExplanation(t);if(own)return {title:ok?"شرح الإجابة":"لماذا؟",text:own};
+  const m=mathExplanation(t);if(m)return {title:ok?"كيف نحسبها؟":"لماذا؟",text:m};
+  if(!ok){const tip=(LES[t.lid]&&LES[t.lid].ls&&LES[t.lid].ls.tip)||"";if(tip)return {title:"تذكير من الدرس",text:escQ(tip)};}
+  return null;
+}
 function adaptiveIndexes(l){const arr=l.q.map((q,i)=>({i,q,st:qstat(q.id)}));const due=new Set(dueKeys().map(k=>k.split("#")[0]));arr.sort((x,y)=>{const xd=due.has(x.q.id)?0:1,yd=due.has(y.q.id)?0:1;if(xd!==yd)return xd-yd;const xa=x.st.a?x.st.o/x.st.a:-1,ya=y.st.a?y.st.o/y.st.a:-1;return xa-ya||Math.random()-.5});return arr.map(x=>x.i)}
 function personalDailyIds(){const all=BOOKS.filter(b=>b.g===(P.grade||GR[0])).flatMap(lessonsOf);const due=new Set(dueKeys());const weak=[];all.forEach(l=>l.q.forEach((q,i)=>{const st=qstat(q.id),key=l.id+"#"+i;if(due.has(key)||(st.a&&st.o/st.a<.7))weak.push([l.id,i])}));const base=weak.length?weak:all.flatMap(l=>l.q.map((_,i)=>[l.id,i]));return sh(base).slice(0,5).map(x=>mkQ(x[0],x[1]))}
 function achievements(){const st=P.stats;return [{id:"first",i:"🌱",n:"أول خطوة",d:"أجيبي عن أول سؤال",ok:st.a>=1},{id:"ten",i:"🎯",n:"عشر إجابات",d:"أجيبي عن 10 أسئلة",ok:st.a>=10},{id:"accurate",i:"🏹",n:"عين الصقر",d:"حققي دقة 80% بعد 20 سؤالًا",ok:st.a>=20&&st.o/st.a>=.8},{id:"streak",i:"🔥",n:"سلسلة مستمرة",d:"حافظي على يومين متتاليين",ok:P.streak.n>=2},{id:"review",i:"🧠",n:"مراجعة ذكية",d:"راجعي سؤالًا من دفتر الأخطاء",ok:Object.values(P.review).some(x=>x.last==="ok")},{id:"explorer",i:"🗺️",n:"مستكشفة المهارات",d:"أكملي 10 محطات",ok:Object.keys(P.stars).length>=10}].map(x=>({...x,unlocked:x.ok}))}
@@ -588,7 +616,7 @@ function ans(k){
   recordAnswer(t,ok);
   save();const hb=$("#bb");if(hb)hb.disabled=true;
   t.o.forEach((o,j)=>{const b=$("#o"+j);b.disabled=true;if(o.id===t.c){b.classList.add("good");b.insertAdjacentHTML("beforeend",'<span class="sr">، الإجابة الصحيحة</span>')}else if(j===k){b.classList.add("wrong");b.insertAdjacentHTML("beforeend",'<span class="sr">، إجابتك غير صحيحة</span>')}});
-  const explanation=qExplanation(t);const tip=explanation?`<div class="learn"><b>🤖 ${ok?"شرح الإجابة":"تفسير السؤال"}</b><p>${explanation}</p></div>`:"";
+  const help=feedbackHelp(t,ok);const tip=help?`<div class="learn"><b>🤖 ${help.title}</b><p>${help.text}</p></div>`:"";
   const correctText=t.o.find(o=>o.id===t.c)?.text||"";
   $("#fb").innerHTML=gx(`<div class="feedback ${ok?"ok":"no"}">${ok?(Q.combo>=3?"رائع! 🔥 سلسلة إجابات صحيحة":"أحسنتِ! إجابة صحيحة."):"ليست صحيحة. الإجابة الصحيحة: <span dir=\"auto\">"+correctText+"</span>"}</div>${tip}<button class="go" onclick="Q.i++;step()">${Q.i===Q.list.length-1?"النتيجة":"السؤال التالي"}</button><button class="linkbtn" type="button" onclick="reportQuestion()">⚑ الإبلاغ عن مشكلة في السؤال</button>`);
 }
