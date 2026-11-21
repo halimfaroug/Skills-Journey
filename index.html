@@ -271,6 +271,49 @@ footer{color:var(--ink2);line-height:1.8}
 .q .naskh{font-weight:700}
 .opt .naskh{font-weight:700;line-height:1.8;font-size:1.2em}
 
+
+/* ===== الشاشة الرئيسية (تصميم 2026-11) ===== */
+.hm-hero{position:relative;overflow:hidden;border-radius:26px;padding:18px 18px 14px;color:#fff;background:radial-gradient(120% 90% at 100% 0%,#3FA9FF 0%,rgba(63,169,255,0) 55%),linear-gradient(135deg,#0B67D1 0%,#0E4FA8 45%,#14A39A 100%);box-shadow:0 10px 26px rgba(11,103,209,.28);margin:4px 0 18px}
+.hm-hero::after{content:"";position:absolute;inset-inline-end:-40px;bottom:-60px;width:180px;height:180px;border-radius:50%;background:rgba(255,255,255,.08)}
+.hm-hero-top{display:flex;align-items:center;gap:8px;position:relative;z-index:1}
+.hm-hero-txt{flex:1}
+.hm-kicker{display:inline-block;background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.35);border-radius:999px;padding:2px 12px;font-size:13px;font-weight:800;margin-bottom:6px}
+.hm-hero h1{font-size:32px;line-height:1.25;margin:0 0 4px;font-weight:900;color:#fff}
+.hm-hero p{margin:0;font-size:16px;font-weight:700;color:rgba(255,255,255,.92);line-height:1.6}
+.hm-bot .bot{width:96px;height:96px;filter:drop-shadow(0 6px 10px rgba(0,0,0,.18))}
+.hm-bot{background:rgba(255,255,255,.95);border-radius:24px;padding:4px;flex:none;animation:hmfloat 3.5s ease-in-out infinite}
+@keyframes hmfloat{50%{transform:translateY(-5px)}}
+.hm-path{display:flex;align-items:center;gap:8px;margin:14px 0 12px;position:relative;z-index:1;font-size:22px}
+.hm-path i{flex:1;height:10px;border-radius:999px;background:rgba(255,255,255,.25);position:relative;background-image:repeating-linear-gradient(90deg,rgba(255,255,255,.45) 0 8px,transparent 8px 16px)}
+.hm-path i b{position:absolute;inset-block:0;inset-inline-start:0;border-radius:999px;background:#FFD566}
+.hm-path em{position:absolute;top:-22px;font-style:normal;font-size:24px;transform:scaleX(-1)}
+.hm-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;position:relative;z-index:1}
+.hm-stats div{background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.25);border-radius:16px;padding:8px 6px;text-align:center}
+.hm-stats b{display:block;font-size:22px;font-weight:900;line-height:1.2;color:#fff}
+.hm-stats small{font-size:12px;font-weight:700;color:rgba(255,255,255,.88)}
+.hm-h{font-size:17px;font-weight:900;margin:6px 2px 10px;color:var(--ink)}
+.hm-grades{display:grid;gap:12px;margin-bottom:18px}
+.hm-grade{--g1:#FF9F43;--g2:#FF6B6B;font:inherit;color:var(--ink);text-align:start;cursor:pointer;display:flex;align-items:center;gap:14px;width:100%;padding:14px;border-radius:22px;border:1px solid var(--line);background:var(--card);box-shadow:0 6px 16px rgba(31,82,126,.10);position:relative;overflow:hidden;transition:transform .15s}
+.hm-grade.g6{--g1:#7C5CFF;--g2:#3E8BFF}
+.hm-grade::before{content:"";position:absolute;inset-block:0;inset-inline-start:0;width:6px;background:linear-gradient(var(--g1),var(--g2))}
+.hm-grade:hover{transform:translateY(-2px)}.hm-grade:active{transform:translateY(1px)}
+.hm-num{flex:none;width:62px;height:62px;border-radius:20px;display:grid;place-items:center;font-size:36px;font-weight:900;color:#fff;background:linear-gradient(135deg,var(--g1),var(--g2));box-shadow:0 6px 14px rgba(0,0,0,.15)}
+.hm-gbody{flex:1;display:flex;flex-direction:column;gap:6px;min-width:0}
+.hm-gbody b{font-size:20px;font-weight:900}
+.hm-subj{display:flex;flex-wrap:wrap;gap:6px}
+.hm-subj span{font-size:13px;font-weight:800;padding:2px 10px;border-radius:999px;background:color-mix(in srgb,var(--g1) 14%,transparent);color:var(--ink)}
+.hm-gbody small{font-size:13px;color:var(--ink2);font-weight:700}
+.hm-gbar{display:block;height:8px;border-radius:999px;background:var(--line);overflow:hidden}
+.hm-gbar i{display:block;height:100%;border-radius:999px;background:linear-gradient(90deg,var(--g1,#14A39A),var(--g2,#0B67D1))}
+.hm-go{font-size:30px;font-weight:900;color:var(--g1);flex:none}
+.hm-tools{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
+.hm-tools button{font:inherit;font-weight:800;font-size:13px;color:var(--ink);background:var(--card);border:1px solid var(--line);border-radius:18px;padding:12px 4px 10px;min-height:84px;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;box-shadow:0 4px 12px rgba(31,82,126,.07);line-height:1.3}
+.hm-tools button span{font-size:26px}
+.hm-tools em{font-style:normal;background:#FF6B6B;color:#fff;border-radius:999px;padding:0 7px;font-size:12px}
+.hm-level{display:flex;flex-direction:column;gap:6px;background:var(--card);border:1px solid var(--line);border-radius:18px;padding:12px 14px;margin-bottom:14px;font-weight:800}
+.hm-level small{color:var(--ink2);font-weight:700;font-size:13px}
+footer .linkbtn{font-size:13px}
+@media (prefers-reduced-motion: reduce){.hm-bot{animation:none}}
 </style>
 
 </head>
@@ -333,21 +376,13 @@ const TOTALQ=BOOKS.reduce((a,b)=>a+qcount(b),0);
 const stars=id=>P.stars[id]||0;
 const GR=[...new Set(BOOKS.map(b=>b.g))];
 const GN={3:"الصف الثالث",6:"الصف السادس"};
-const LEVELS=[[0,"مسافر مبتدئ"],[120,"مستكشف"],[350,"رحّالة"],[700,"ملّاح"],[1200,"قائد الرحلة"],[2000,"خبير المهارات"],[3200,"سفير المهارات"]];
+const LEVELS=[[0,"بداية الرحلة"],[120,"الاستكشاف"],[350,"الترحال"],[700,"الإبحار"],[1200,"قيادة الرحلة"],[2000,"إتقان المهارات"],[3200,"سفارة المهارات"]];
 const level=()=>{let l=0;LEVELS.forEach((x,i)=>{if(P.xp>=x[0])l=i});return l};
 const addXP=n=>{P.xp+=n;save();$("#xpv").textContent=P.xp};
 
-/* ======================== الصيغة: طالبة / طالب ======================== */
-const FM={"أجيبي": "أجب", "وأجيبي": "وأجب", "ابحثي": "ابحث", "وابحثي": "وابحث", "ابدئي": "ابدأ", "تبدئي": "تبدأ", "اتبعي": "اتبع", "اجمعي": "اجمع", "اختاري": "اختر", "واختاري": "واختر", "اربطي": "اربط", "ارجعي": "ارجع", "اسألي": "اسأل", "استبعدي": "استبعد", "فاستبعدي": "فاستبعد", "استمري": "استمر", "اضغطي": "اضغط", "اطرحي": "اطرح", "اعتمدي": "اعتمد", "تعتمدي": "تعتمد", "افتحي": "افتح", "وافتحي": "وافتح", "اقرئي": "اقرأ", "اكتبي": "اكتب", "تجرّبي": "تجرّب", "جرّبي": "جرّب", "وجرّبي": "وجرّب", "تجيبي": "تجيب", "تخيّلي": "تخيّل", "تراجعي": "تراجع", "تعرفي": "تعرف", "تعلّمي": "تعلّم", "تعودي": "تعود", "ثبّتي": "ثبّت", "حدّدي": "حدّد", "راجعي": "راجع", "رتّبي": "رتّب", "ضعي": "ضع", "عدّي": "عدّ", "عوّضي": "عوّض", "فكّري": "فكّر", "قدّري": "قدّر", "مرّري": "مرّر", "وحّدي": "وحّد", "لتجمعي": "لتجمع", "قادرة": "قادر", "بطلة": "بطل", "انطلقي": "انطلق", "تذكّري": "تذكّر", "أكملي": "أكمل", "حاولي": "حاول", "أعيدي": "أعد", "تابعي": "تابع", "سافري": "سافر", "ركّزي": "ركّز", "لاحظي": "لاحظ", "اقرإي": "اقرأ", "تفضّلي": "تفضّل", "اسمعي": "اسمع", "أتممتِ": "أتممتَ", "واصلي": "واصل", "تأكّدي": "تأكّد", "وانطلقي": "وانطلق", "ولاحظي": "ولاحظ", "وتذكّري": "وتذكّر", "تدربي": "تدرب", "تدرّبي": "تدرّب", "احفظي": "احفظ", "انقلي": "انقل", "حافظي": "حافظ", "حققي": "حقق", "لتخرجي": "لتخرج", "لتنتقلي": "لتنتقل", "تحتاجين": "تحتاج", "تريدين": "تريد", "مستكشفة": "مستكشف"};
-const FMK={};for(const k in FM)FMK[k.replace(/[\u064B-\u0652]/g,"")]=FM[k];
-function gx(s){
-  if(P.gender!=="m")return s;
-  return s.split(/(<div class="passage">[\s\S]*?<\/div>)/).map((seg,i)=>i%2?seg:seg.replace(/[\u0621-\u0652]+/g,tok=>{
-    const k=tok.replace(/[\u064B-\u0652]/g,"");
-    if(FMK[k])return FMK[k];
-    if(/[\u062A\u0643]\u0650$/.test(tok)&&!/^(?:[وفبك]?ال|لل)/.test(k))return tok.slice(0,-1)+"\u064E";
-    return tok;})).join("");
-}
+/* صيغة الخطاب محايدة للجميع؛ لا تحويل */
+function gx(s){return s}
+
 
 /* عدد + معدود بقواعد العربية: 1 واحد، 2 مثنى، 3–10 جمع، 11–99 مفرد منصوب */
 const ARW={"درس":["درس","درسان","دروس","درسًا","درس واحد"],"فصل":["فصل","فصلان","فصول","فصلًا","فصل واحد"],"سؤال":["سؤال","سؤالان","أسئلة","سؤالًا","سؤال واحد"],"محطة":["محطة","محطتان","محطات","محطة","محطة واحدة"],"مدينة":["مدينة","مدينتان","مدن","مدينة","مدينة واحدة"],"محاولة":["محاولة","محاولتان","محاولات","محاولة","محاولة واحدة"],"مهارة":["مهارة","مهارتان","مهارات","مهارة","مهارة واحدة"],"يوم":["يوم","يومان","أيام","يومًا","يوم واحد"],"مجموعة":["مجموعة","مجموعتان","مجموعات","مجموعة","مجموعة واحدة"]};
@@ -390,7 +425,7 @@ function feedbackHelp(t,ok){
 }
 function adaptiveIndexes(l){const arr=l.q.map((q,i)=>({i,q,st:qstat(q.id)}));const due=new Set(dueKeys().map(k=>k.split("#")[0]));arr.sort((x,y)=>{const xd=due.has(x.q.id)?0:1,yd=due.has(y.q.id)?0:1;if(xd!==yd)return xd-yd;const xa=x.st.a?x.st.o/x.st.a:-1,ya=y.st.a?y.st.o/y.st.a:-1;return xa-ya||Math.random()-.5});return arr.map(x=>x.i)}
 function personalDailyIds(){const all=BOOKS.filter(b=>b.g===(P.grade||GR[0])).flatMap(lessonsOf);const due=new Set(dueKeys());const weak=[];all.forEach(l=>l.q.forEach((q,i)=>{const st=qstat(q.id),key=l.id+"#"+i;if(due.has(key)||(st.a&&st.o/st.a<.7))weak.push([l.id,i])}));const base=weak.length?weak:all.flatMap(l=>l.q.map((_,i)=>[l.id,i]));return sh(base).slice(0,5).map(x=>mkQ(x[0],x[1]))}
-function achievements(){const st=P.stats;return [{id:"first",i:"🌱",n:"أول خطوة",d:"أجيبي عن أول سؤال",ok:st.a>=1},{id:"ten",i:"🎯",n:"عشر إجابات",d:"أجيبي عن 10 أسئلة",ok:st.a>=10},{id:"accurate",i:"🏹",n:"عين الصقر",d:"حققي دقة 80% بعد 20 سؤالًا",ok:st.a>=20&&st.o/st.a>=.8},{id:"streak",i:"🔥",n:"سلسلة مستمرة",d:"حافظي على يومين متتاليين",ok:P.streak.n>=2},{id:"review",i:"🧠",n:"مراجعة ذكية",d:"راجعي سؤالًا من دفتر الأخطاء",ok:Object.values(P.review).some(x=>x.last==="ok")},{id:"explorer",i:"🗺️",n:"مستكشفة المهارات",d:"أكملي 10 محطات",ok:Object.keys(P.stars).length>=10}].map(x=>({...x,unlocked:x.ok}))}
+function achievements(){const st=P.stats;return [{id:"first",i:"🌱",n:"أول خطوة",d:"الإجابة عن أول سؤال",ok:st.a>=1},{id:"ten",i:"🎯",n:"عشر إجابات",d:"الإجابة عن 10 أسئلة",ok:st.a>=10},{id:"accurate",i:"🏹",n:"عين الصقر",d:"دقة 80% بعد 20 سؤالًا",ok:st.a>=20&&st.o/st.a>=.8},{id:"streak",i:"🔥",n:"سلسلة مستمرة",d:"التدريب يومين متتاليين",ok:P.streak.n>=2},{id:"review",i:"🧠",n:"مراجعة ذكية",d:"مراجعة سؤال من دفتر الأخطاء",ok:Object.values(P.review).some(x=>x.last==="ok")},{id:"explorer",i:"🗺️",n:"استكشاف المهارات",d:"إكمال 10 محطات",ok:Object.keys(P.stars).length>=10}].map(x=>({...x,unlocked:x.ok}))}
 /* أرقام الكتاب المدرسي: ١٢٣ واتجاه من اليمين إلى اليسار (يمكن التبديل إلى 123 من «تخصيص») */
 const AD="٠١٢٣٤٥٦٧٨٩",SUPM={"⁰":"0","¹":"1","²":"2","³":"3","⁴":"4","⁵":"5","⁶":"6","⁷":"7","⁸":"8","⁹":"9"};
 const numMode=()=>(P.settings&&P.settings.digits)==="en"?"en":"ar";
@@ -428,8 +463,8 @@ function startNumObserver(){
   arabizeIn(document.body);
 }
 function applySettings(){const r=document.documentElement;const st=P.settings||{};if(st.theme&&st.theme!=="auto")r.dataset.theme=st.theme;else delete r.dataset.theme;r.dataset.font=st.font||"normal";if(document.body){startNumObserver();if(numMode()==="ar")arabizeIn(document.body)}}
-function settings(){const st=P.settings||{};show(`<h1>⚙️ تخصيص الرحلة</h1><p class="muted">اختاري ما يساعدك على التركيز والقراءة.</p><div class="setting-row"><span><b>المظهر</b><small>تلقائي أو فاتح أو داكن</small></span><span><button class="pill" onclick="P.settings.theme='light';applySettings();save();settings()">فاتح</button><button class="pill" onclick="P.settings.theme='dark';applySettings();save();settings()">داكن</button><button class="pill" onclick="P.settings.theme='auto';applySettings();save();settings()">تلقائي</button></span></div><div class="setting-row"><span><b>حجم الخط</b><small>مفيد للقراءة المريحة</small></span><span><button class="pill" onclick="P.settings.font='normal';applySettings();save();settings()">عادي</button><button class="pill" onclick="P.settings.font='large';applySettings();save();settings()">كبير</button><button class="pill" onclick="P.settings.font='xl';applySettings();save();settings()">أكبر</button></span></div><div class="setting-row"><span><b>الأرقام</b><small>كما في الكتاب المدرسي، أو أرقام <span data-latin>123</span></small></span><span><button class="pill" onclick="P.settings.digits='ar';save();settings()">١٢٣ كما في الكتاب</button><button class="pill" data-latin onclick="P.settings.digits='en';save();location.reload()">123</button></span></div><div class="card"><h2>🔊 وصول أفضل</h2><p>يدعم التطبيق لوحة المفاتيح، وتباين الألوان، والقراءة النصية في الجهاز، ويقلل الحركة عند تفعيل إعداد تقليل الحركة في النظام.</p></div><button class="go alt" onclick="back()">رجوع</button>`)}
-function skillMap(){const g=P.grade||GR[0],bs=BOOKS.filter(b=>b.g===g),stats={};bs.flatMap(lessonsOf).forEach(l=>{const k=skillOf(l);stats[k]=stats[k]||{a:0,o:0,lessons:0};stats[k].lessons++;l.q.forEach(q=>{const x=qstat(q.id);stats[k].a+=x.a;stats[k].o+=x.o})});const rows=Object.entries(stats).map(([k,v])=>{const pct=v.a?Math.round(v.o/v.a*100):0;return `<div class="skill-card"><b><span>${k}</span><span>${pct}%</span></b><small>${cnt(v.a,"محاولة")} · ${cnt(v.lessons,"درس")}</small><div class="bar"><i style="width:${pct}%"></i></div></div>`}).join("");show(`<h1>🧭 خريطة المهارات</h1><p class="muted">تتحدث الخريطة تلقائيًا حسب إجاباتك، وتُظهر أين تحتاجين إلى تدريب إضافي.</p><div class="skill-grid">${rows||'<p class="muted">ابدئي بالتدريب لتظهر خريطتك.</p>'}</div><button class="go alt" onclick="back()">رجوع</button>`)}
+function settings(){const st=P.settings||{};show(`<h1>⚙️ تخصيص الرحلة</h1><p class="muted">إعدادات تساعد على التركيز والقراءة.</p><div class="setting-row"><span><b>المظهر</b><small>تلقائي أو فاتح أو داكن</small></span><span><button class="pill" onclick="P.settings.theme='light';applySettings();save();settings()">فاتح</button><button class="pill" onclick="P.settings.theme='dark';applySettings();save();settings()">داكن</button><button class="pill" onclick="P.settings.theme='auto';applySettings();save();settings()">تلقائي</button></span></div><div class="setting-row"><span><b>حجم الخط</b><small>مفيد للقراءة المريحة</small></span><span><button class="pill" onclick="P.settings.font='normal';applySettings();save();settings()">عادي</button><button class="pill" onclick="P.settings.font='large';applySettings();save();settings()">كبير</button><button class="pill" onclick="P.settings.font='xl';applySettings();save();settings()">أكبر</button></span></div><div class="setting-row"><span><b>الأرقام</b><small>كما في الكتاب المدرسي، أو أرقام <span data-latin>123</span></small></span><span><button class="pill" onclick="P.settings.digits='ar';save();settings()">١٢٣ كما في الكتاب</button><button class="pill" data-latin onclick="P.settings.digits='en';save();location.reload()">123</button></span></div><div class="card"><h2>🔊 وصول أفضل</h2><p>يدعم التطبيق لوحة المفاتيح، وتباين الألوان، والقراءة النصية في الجهاز، ويقلل الحركة عند تفعيل إعداد تقليل الحركة في النظام.</p></div><button class="go alt" onclick="back()">رجوع</button>`)}
+function skillMap(){const g=P.grade||GR[0],bs=BOOKS.filter(b=>b.g===g),stats={};bs.flatMap(lessonsOf).forEach(l=>{const k=skillOf(l);stats[k]=stats[k]||{a:0,o:0,lessons:0};stats[k].lessons++;l.q.forEach(q=>{const x=qstat(q.id);stats[k].a+=x.a;stats[k].o+=x.o})});const rows=Object.entries(stats).map(([k,v])=>{const pct=v.a?Math.round(v.o/v.a*100):0;return `<div class="skill-card"><b><span>${k}</span><span>${pct}%</span></b><small>${cnt(v.a,"محاولة")} · ${cnt(v.lessons,"درس")}</small><div class="bar"><i style="width:${pct}%"></i></div></div>`}).join("");show(`<h1>🧭 خريطة المهارات</h1><p class="muted">تتحدث الخريطة تلقائيًا حسب إجاباتك، وتُظهر المهارات التي تحتاج إلى تدريب إضافي.</p><div class="skill-grid">${rows||'<p class="muted">تظهر الخريطة بعد بدء التدريب.</p>'}</div><button class="go alt" onclick="back()">رجوع</button>`)}
 applySettings();
 
 
@@ -471,48 +506,54 @@ const THEME={ma:{n:"مدينة الأعداد",e:"🏛️",deco:["🌵","🧮","
 const TR=["🚶","🚲","🛵","🚗","🚆","✈️","🚀"],PAL=["#FFD27A","#9ED8F5","#BDE8C6","#F7B6C8","#D3C4F5","#FFC9A3"];
 function scene(th,pct,small){const t=THEME[th]||THEME.ma;
   return `<div class="scene ${small?"small":""}" style="--t1:${t.c1};--t2:${t.c2}" aria-hidden="true"><span class="sun">☀️</span><span class="cloud c1">☁️</span><span class="cloud c2">☁️</span><svg class="hills" viewBox="0 0 400 90" preserveAspectRatio="none"><path d="M0 60 Q60 20 130 55 T260 50 T400 40 V90 H0Z" fill="var(--grass)" opacity=".55"/><path d="M0 75 Q80 45 170 72 T330 65 T400 70 V90 H0Z" fill="var(--grass)"/></svg><span class="home">🏠</span><span class="land">${t.e}</span><span class="flag">🏁</span><span class="balloon" style="inset-inline-start:${Math.min(76,Math.max(12,12+pct*0.64))}%">🎈</span></div>`}
-function postcard(c){return `<div class="postcard"><span class="pc-stamp" aria-hidden="true">${c.e}</span><b>📮 تحية من «${c.n}»</b><p>وصلتِ إلى محطة جديدة في رحلتك، وحصلتِ على ختم في جواز سفرك.</p></div>`}
+function postcard(c){return `<div class="postcard"><span class="pc-stamp" aria-hidden="true">${c.e}</span><b>📮 تحية من «${c.n}»</b><p>محطة جديدة في الرحلة، وختم جديد في جواز السفر!</p></div>`}
 
-function pickGender(){
-  show(`${say("happy","<h1>أهلًا بك في رحلة المهارات التعليمية!</h1><p>أنا مساعدك التعليمي. هل أنت طالب أم طالبة؟</p>")}
-  <div class="stack"><button class="big" onclick="setGender('f')"><span><b>طالبة</b></span><span class="e" aria-hidden="true">👧</span></button>
-  <button class="big" onclick="setGender('m')"><span><b>طالب</b></span><span class="e" aria-hidden="true">👦</span></button></div>
-  <p class="fine" style="text-align:center;margin-top:14px">يمكنك تغيير ذلك لاحقًا من الشاشة الرئيسية.</p>`,{noBack:true});
-}
-function setGender(x){P.gender=x;save();swap(home)}
 function streakN(){const t=today();return P.streak.n&&(P.streak.d===t||P.streak.d===yesterday())?P.streak.n:0}
-function streakTxt(){const n=streakN();return n?`🔥 تدريب متتالٍ: ${cnt(n,"يوم")}`:"🔥 ابدئي سلسلتك اليوم"}
+function streakTxt(){const n=streakN();return n?`🔥 تدريب متتالٍ: ${cnt(n,"يوم")}`:"🔥 سلسلة اليوم تبدأ الآن"}
 const dstr=d=>d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0");
 const today=()=>dstr(new Date());const yesterday=()=>{const d=new Date();d.setDate(d.getDate()-1);return dstr(d)};
 
 function home(){
-  if(!P.gender)return pickGender();
   const lv=level(),next=LEVELS[lv+1];
   const allL=BOOKS.flatMap(lessonsOf),gotAll=allL.reduce((a,l)=>a+stars(l.id),0),pctAll=allL.length?gotAll/(allL.length*3)*100:0;
-  show(`<button class="infostrip" onclick="go(about)"><span aria-hidden="true">ℹ️</span><span>عن التطبيق · الخصوصية · إخلاء المسؤولية</span><span aria-hidden="true">‹</span></button>${navigator.onLine?"":`<div class="offline-note" role="status">أنتِ الآن دون اتصال؛ الرحلة الأساسية متاحة من النسخة المحفوظة.</div>`}
-  ${say("happy",`<h1>رحلة المهارات</h1><p class="muted" style="color:var(--accent);font-weight:800">${APP.tag}</p><p>حدّدي صفك وانطلقي في رحلة منظمة بين دروس كتبك!</p>`)}
-  ${scene("ma",pctAll,true)}
-  <div class="chips"><span class="chip">${TR[lv]} ${LEVELS[lv][1]}</span><span class="chip">${streakTxt()}</span><span class="chip">📚 ${cnt(TOTALQ,"سؤال")}</span></div>
-  <div class="stack">${GR.map(g=>{const bs=BOOKS.filter(b=>b.g===g);const tot=bs.reduce((a,b)=>a+lessonsOf(b).length*3,0),got=bs.reduce((a,b)=>a+lessonsOf(b).reduce((x,l)=>x+stars(l.id),0),0);
-    return `<button class="big" onclick="go(books,${g})"><span><b>${GN[g]}</b><small>${bs.map(b=>b.n).join(" · ")} · ${cnt(bs.reduce((a,b)=>a+qcount(b),0),"سؤال")}</small><div class="bar"><i style="width:${tot?got/tot*100:0}%"></i></div></span><span class="e" aria-hidden="true">🧭</span></button>`}).join("")}</div>
-  <div class="tools">
-    <button class="tool" onclick="go(daily)"><span>🎯</span>مهمة اليوم</button>
-    <button class="tool" onclick="go(passport)"><span>🛂</span>جواز السفر</button>
-    <button class="tool" onclick="go(review)"><span>📒</span>دفتر الأخطاء (${mistN()})</button>
-    <button class="tool" onclick="go(progress)"><span>📈</span>تقدّمي</button>
-    <button class="tool" onclick="go(skillMap)"><span>🧭</span>خريطة المهارات</button>
-    <button class="tool" onclick="go(settings)"><span>⚙️</span>تخصيص</button>
-  </div>
-  <section class="extra" aria-labelledby="extraT"><h2 id="extraT">تطبيق إضافي للمفردات</h2>
-    <a class="big extra-app" href="https://kalimati-crafter.vercel.app/" target="_blank" rel="noopener"><span><b>كلماتي · My Words</b><small>مفردات إنجليزية–عربية بالصور والصوت والبطاقات. تطبيق مستقل، وليس من محتوى «نافس». يفتح في نافذة جديدة.</small></span><span class="e" aria-hidden="true">🔤</span></a>
+  const GSTY={3:{n:"٣",c:"g3"},6:{n:"٦",c:"g6"}};
+  const lvPct=next?Math.min(100,(P.xp-LEVELS[lv][0])/(next[0]-LEVELS[lv][0])*100):100;
+  show(`${navigator.onLine?"":`<div class="offline-note" role="status">التطبيق الآن دون اتصال؛ الرحلة الأساسية متاحة من النسخة المحفوظة.</div>`}
+  <section class="hm-hero">
+    <div class="hm-hero-top">
+      <div class="hm-hero-txt">
+        <span class="hm-kicker">تدريب على مهارات «نافس»</span>
+        <h1>رحلة المهارات</h1>
+        <p>أختار صفي، وأنطلق في رحلة ممتعة بين دروس كتبي ✨</p>
+      </div>
+      <div class="hm-bot">${robot("happy")}</div>
+    </div>
+    <div class="hm-path" aria-hidden="true"><span>🏠</span><i><b style="width:${Math.max(4,pctAll)}%"></b><em style="inset-inline-start:calc(${Math.max(4,pctAll)}% - 14px)">${TR[lv]}</em></i><span>🏁</span></div>
+    <div class="hm-stats">
+      <div><b>${P.xp}</b><small>نقطة ⭐</small></div>
+      <div><b>${streakN()}</b><small>أيام متتالية 🔥</small></div>
+      <div><b>${TOTALQ.toLocaleString("en")}</b><small>سؤالًا تدريبيًّا</small></div>
+    </div>
   </section>
-  ${next?`<p class="fine" style="text-align:center">تبقّى ${next[0]-P.xp} نقطة لتنتقلي إلى ${TR[lv+1]} ولقب «${next[1]}»</p>`:""}
-  ${isStandalone()?"":`<button class="go alt" onclick="go(install)">📲 ضعي التطبيق كأيقونة على شاشتك</button>`}
-  <footer>أسئلة تدريبية أصلية مستوحاة من المهارات العامة للاختبارات الوطنية «نافس» وليست أسئلة رسمية · بدون حساب وبدون إعلانات<br><button class="linkbtn" onclick="setGender('${P.gender==="m"?"f":"m"}')">${P.gender==="m"?"👧 التبديل إلى: طالبة":"👦 التبديل إلى: طالب"}</button></footer>`);
+  <h2 class="hm-h">أختار صفّي</h2>
+  <div class="hm-grades">${GR.map(g=>{const bs=BOOKS.filter(b=>b.g===g);const tot=bs.reduce((a,b)=>a+lessonsOf(b).length*3,0),got=bs.reduce((a,b)=>a+lessonsOf(b).reduce((x,l)=>x+stars(l.id),0),0),p=tot?Math.round(got/tot*100):0,y=GSTY[g]||{n:g,c:"g3"};
+    return `<button class="hm-grade ${y.c}" onclick="go(books,${g})"><span class="hm-num" aria-hidden="true">${y.n}</span><span class="hm-gbody"><b>${GN[g]}</b><span class="hm-subj">${bs.map(b=>`<span>${b.e||""} ${b.n}</span>`).join("")}</span><span class="hm-gbar"><i style="width:${p}%"></i></span><small>${cnt(bs.reduce((a,b)=>a+qcount(b),0),"سؤال")} · الإنجاز ${p}%</small></span><span class="hm-go" aria-hidden="true">‹</span></button>`}).join("")}</div>
+  <h2 class="hm-h">أدوات الرحلة</h2>
+  <div class="hm-tools">
+    <button onclick="go(daily)"><span>🎯</span>مهمة اليوم</button>
+    <button onclick="go(review)"><span>📒</span>دفتر الأخطاء${mistN()?` <em>${mistN()}</em>`:""}</button>
+    <button onclick="go(passport)"><span>🛂</span>جواز السفر</button>
+    <button onclick="go(progress)"><span>📈</span>تقدّمي</button>
+    <button onclick="go(skillMap)"><span>🧭</span>خريطة المهارات</button>
+    <button onclick="go(settings)"><span>⚙️</span>تخصيص</button>
+  </div>
+  <div class="hm-level"><span>${TR[lv]} مرحلة «${LEVELS[lv][1]}»</span><span class="hm-gbar"><i style="width:${lvPct}%"></i></span><small>${next?`تبقّى ${next[0]-P.xp} نقطة للانتقال إلى ${TR[lv+1]} مرحلة «${next[1]}»`:"اكتملت كل المراحل! 🏆"}</small></div>
+  ${isStandalone()?"":`<button class="go alt" onclick="go(install)">📲 إضافة التطبيق إلى الشاشة الرئيسية</button>`}
+  <footer>أسئلة تدريبية أصلية مستوحاة من المهارات العامة للاختبارات الوطنية «نافس» وليست أسئلة رسمية · بدون حساب وبدون إعلانات<br><button class="linkbtn" onclick="go(about)">عن التطبيق · الخصوصية</button> · <a class="linkbtn" href="https://kalimati-crafter.vercel.app/" target="_blank" rel="noopener">تطبيق آخر للمفردات الإنجليزية: كلماتي ↗</a></footer>`);
 }
 function books(g){
   const bs=BOOKS.filter(b=>b.g===g);
-  show(`<div class="muted" style="font-weight:700;margin-bottom:6px">${GN[g]}</div>${say("happy","إلى أين نذهب اليوم؟ حدّدي الكتاب الذي تريدين مراجعته:")}
+  show(`<div class="muted" style="font-weight:700;margin-bottom:6px">${GN[g]}</div>${say("happy","إلى أين نذهب اليوم؟ لنختر الكتاب:")}
   <div class="stack">${bs.map(b=>{const ls=lessonsOf(b),tot=ls.length*3,got=ls.reduce((a,l)=>a+stars(l.id),0);
     return `<button class="big" onclick="go(journey,'${b.id}')"><span><b>${b.n}</b><small>${b.parts.length===2?"جزءان":b.parts.length+" أجزاء"} · ${cnt(ls.length,"درس")} · ${cnt(qcount(b),"سؤال")}</small><div class="bar"><i style="width:${tot?got/tot*100:0}%"></i></div></span><span class="e" aria-hidden="true">${b.e}</span></button>`}).join("")}</div>`);
 }
@@ -529,15 +570,15 @@ function journey(bid){
     const chs=pt.chapters.map(c=>{
       const cl=c.lessons,got=cl.reduce((a,l)=>a+stars(l.id),0),tot=cl.length*3,dn=cl.filter(l=>stars(l.id)>0).length,cOpen=dn>=Math.ceil(cl.length/2),cst=P.chest[c.id]||0,k=ci++;
       return `<section class="city" style="--cc:${PAL[k%6]}"><div class="cityhead"><span class="em" aria-hidden="true">${c.e}</span><span style="flex:1"><b>${c.n}</b><small>${cnt(cl.length,"محطة")} · ${got}/${tot} ⭐${cst?" · 🛂 ختم":""}</small><div class="bar"><i style="width:${tot?got/tot*100:0}%"></i></div></span></div>
-      <div class="road">${cl.map((l,i)=>{const s=stars(l.id),here=ns&&ns.id===l.id;return `<div class="sw ${i%2?"e":"s"}"><span class="deco" aria-hidden="true">${th.deco[(k*3+i)%th.deco.length]}</span><button class="stop ${s?"done":""} ${here?"here":""}" onclick="go(lessonIntro,'${l.id}')">${here?`<span class="here-tag">${TR[lv]} أنتِ هنا</span>`:""}<span class="n">${i+1}</span><b>${l.t}</b><span class="st">${st(s)}</span></button></div>`}).join("")}</div>
-      <button class="chest ${cOpen?"":"locked"}" onclick="${cOpen?`go(startChest,'${c.id}')`:`toast('أكملي نصف محطات الفصل على الأقل لفتح الصندوق')`}"><span class="em">${cOpen?(cst?"🛂":"🎁"):"🔒"}</span><span>صندوق الفصل وختم جواز السفر<small>${cOpen?(cst?`أفضل نتيجة: ${st(cst)}`:"تحدٍّ شامل من محطات الفصل"):"يُفتح بعد إنهاء نصف المحطات"}</small></span></button></section>`}).join("");
+      <div class="road">${cl.map((l,i)=>{const s=stars(l.id),here=ns&&ns.id===l.id;return `<div class="sw ${i%2?"e":"s"}"><span class="deco" aria-hidden="true">${th.deco[(k*3+i)%th.deco.length]}</span><button class="stop ${s?"done":""} ${here?"here":""}" onclick="go(lessonIntro,'${l.id}')">${here?`<span class="here-tag">${TR[lv]} 📍 هنا</span>`:""}<span class="n">${i+1}</span><b>${l.t}</b><span class="st">${st(s)}</span></button></div>`}).join("")}</div>
+      <button class="chest ${cOpen?"":"locked"}" onclick="${cOpen?`go(startChest,'${c.id}')`:`toast('يُفتح الصندوق بعد إكمال نصف محطات الفصل على الأقل')`}"><span class="em">${cOpen?(cst?"🛂":"🎁"):"🔒"}</span><span>صندوق الفصل وختم جواز السفر<small>${cOpen?(cst?`أفضل نتيجة: ${st(cst)}`:"تحدٍّ شامل من محطات الفصل"):"يُفتح بعد إنهاء نصف المحطات"}</small></span></button></section>`}).join("");
     return `<div class="part">${pt.n}<small>${cnt(pt.chapters.length,"مدينة")} · ${cnt(pls.length,"محطة")} · ${cnt(qcount(pt),"سؤال")}</small></div>${chs}
-    <button class="castle ${open?"":"locked"}" onclick="${open?`go(startCastle,'${pt.id}')`:`toast('أكملي نصف محطات هذا الجزء على الأقل لفتح القلعة')`}"><span class="em">${open?"🏰":"🔒"}</span><span>قلعة ${pt.n}<small>${open?(cs?`أفضل نتيجة: ${cs.s} من ${cs.n}`:"اختبار تجريبي شامل بلا تلميحات"):"تُفتح بعد إنهاء نصف محطات الجزء"}</small></span></button>`}).join("");
+    <button class="castle ${open?"":"locked"}" onclick="${open?`go(startCastle,'${pt.id}')`:`toast('تُفتح القلعة بعد إكمال نصف محطات هذا الجزء على الأقل')`}"><span class="em">${open?"🏰":"🔒"}</span><span>قلعة ${pt.n}<small>${open?(cs?`أفضل نتيجة: ${cs.s} من ${cs.n}`:"اختبار تجريبي شامل بلا تلميحات"):"تُفتح بعد إنهاء نصف محطات الجزء"}</small></span></button>`}).join("");
   show(`<div class="muted" style="font-weight:700;margin-bottom:6px">${GN[b.g]} · ${b.n} · ${th.n}</div>
   ${scene(b.sid,pct)}
   <div class="trip" aria-hidden="true"><span>🏠</span><div class="tbar"><i style="width:${pct}%"></i><b class="car" style="inset-inline-start:calc(${Math.min(96,pct)}% - 8px)">${TR[lv]}</b></div><span>🏁</span></div>
   <p class="fine" style="margin-bottom:8px">المسافة المقطوعة: <b>${gotAll*10}</b> كم من ${totAll*10} كم · مركبتك الآن: ${TR[lv]}</p>
-  ${say("happy",ns?`<b>مدرّبك الروبوت</b><p>محطتك التالية: <b>${ns.t}</b>. اضغطي عليها وانطلقي!</p>`:"<b>رحلة موفّقة!</b><p>أتممتِ كل المحطات. جرّبي القلاع للحصول على 3 نجوم!</p>")}
+  ${say("happy",ns?`<b>مدرّبك الروبوت</b><p>محطتك التالية: <b>${ns.t}</b>. هيا ننطلق!</p>`:"<b>رحلة موفّقة!</b><p>اكتملت كل المحطات! القلاع بانتظارك للحصول على 3 نجوم.</p>")}
   <div id="toast"></div>${parts}`);
 }
 function toast(t){const e=$("#toast");if(e)e.innerHTML=`<div class="note">${t}</div>`}
@@ -547,7 +588,7 @@ function lessonIntro(id){
   show(`<div class="muted" style="font-weight:700;margin-bottom:6px">${o.bk.n} · ${o.pt.n} · ${o.c.n}</div>
   <h2>${o.ls.t}</h2><div class="chips"><span class="chip">${st(stars(id))}</span><span class="chip">${cnt(o.ls.q.length,"سؤال")} في هذه المحطة</span></div>
   <div class="learn"><b>🎒 حقيبة الدرس: تذكير سريع</b><p>${o.ls.tip}</p></div>
-  <button class="go" onclick="swap(startLesson,'${id}')">انطلقي في المحطة 🚀</button>
+  <button class="go" onclick="swap(startLesson,'${id}')">هيا إلى المحطة 🚀</button>
   <button class="go alt" onclick="back()">رجوع للخريطة</button>`);
 }
 
@@ -573,21 +614,21 @@ function review(){
 function step(first){
   if(Q.i>=Q.list.length)return finish();
   const t=Q.list[Q.i];Q.ans=false;Q.hinted=false;
-  const intros={lesson:"اقرئي كل سؤال جيدًا. لديكِ "+Q.hints+" تلميحات: أحذف لكِ إجابة خاطئة.",chest:"تحدٍّ من دروس الفصل. تذكّري ما تعلّمتِه في المحطات!",castle:"لا تلميحات في القلعة، فهذا اختبار تجريبي. أجيبي بنفسك!",daily:"خمسة أسئلة سريعة لمهمة اليوم. بالتوفيق!",review:"نراجع أخطاءك: أجيبي إجابة صحيحة لتخرجي السؤال من الدفتر."};
+  const intros={lesson:"نقرأ كل سؤال جيدًا. في هذه المحطة "+Q.hints+" تلميحات، وكل تلميح يحذف إجابة خاطئة.",chest:"تحدٍّ من دروس الفصل، يجمع ما تعلّمناه في المحطات!",castle:"لا تلميحات في القلعة، فهذا اختبار تجريبي يشبه «نافس».",daily:"خمسة أسئلة سريعة لمهمة اليوم. بالتوفيق!",review:"نراجع الأخطاء: الإجابة الصحيحة تُخرج السؤال من الدفتر."};
   const intro=first?say("happy",`<p>${intros[Q.mode]}</p>`):"";
-  const aid=Q.mode==="castle"?`<p class="muted" style="text-align:center">🤖 لا تلميحات في القلعة. اعتمدي على نفسك!</p>`:(Q.hints>0?`<button class="go alt" id="bb" onclick="hint()">💡 تلميح من الروبوت (${Q.hints})</button>`:`<p class="muted" style="text-align:center">انتهت التلميحات. أنتِ قادرة!</p>`);
+  const aid=Q.mode==="castle"?`<p class="muted" style="text-align:center">🤖 لا تلميحات في القلعة؛ هذا وقت الاعتماد على النفس!</p>`:(Q.hints>0?`<button class="go alt" id="bb" onclick="hint()">💡 تلميح من الروبوت (${Q.hints})</button>`:`<p class="muted" style="text-align:center">انتهت التلميحات. ثقتي بك كبيرة!</p>`);
   show(`${intro}<div class="prog"><i style="width:${Q.i/Q.list.length*100}%"></i></div>
   <div class="quiz-meta"><span>${Q.title} · سؤال ${Q.i+1} من ${Q.list.length}${Q.combo>=3?` · 🔥 ×${Q.combo}`:""}</span><span class="skill">مهارة: ${LES[t.lid]?.ls.t||"تدريب"}</span></div>
-  ${t.ctx?`<div class="plabel">اقرئي جيدًا:</div><div class="passage"><div${isVoweled(t.ctx)?' class="naskh"':""}>${t.ctx}</div></div>`:""}
+  ${t.ctx?`<div class="plabel">لنقرأ جيدًا:</div><div class="passage"><div${isVoweled(t.ctx)?' class="naskh"':""}>${t.ctx}</div></div>`:""}
   <div class="card"><div class="q" dir="auto">${t.qhtml||qHtml(t.q)}</div></div>
   <div class="opts" role="group" aria-label="خيارات الإجابة">${t.o.map((o,k)=>`<button class="opt" id="o${k}" data-option-id="${o.id}" dir="auto" onclick="ans(${k})"><span class="option-letter" aria-hidden="true">${["أ","ب","ج","د","هـ"][k]||k+1}</span><span${isVoweled(o.text)?' class="naskh"':""}>${o.text}</span></button>`).join("")}</div>
   <div id="ai">${aid}</div><div id="fb" aria-live="polite"></div><div id="toast" aria-live="polite"></div>`,{quiz:true});
 }
 function hint(){
   if(Q.ans||Q.hinted||Q.hints<=0)return;
-  if(Q.list[Q.i].o.length<3){$("#ai").innerHTML=gx(say("think","هذا سؤال من خيارين، فلا تلميح فيه. فكّري جيدًا ثم اختاري!"));return;}Q.hinted=true;Q.hints--;
+  if(Q.list[Q.i].o.length<3){$("#ai").innerHTML=gx(say("think","هذا سؤال من خيارين، فلا تلميح فيه. التفكير أولًا ثم الاختيار!"));return;}Q.hinted=true;Q.hints--;
   const t=Q.list[Q.i];const w=t.o.map((o,j)=>j).filter(j=>t.o[j].id!==t.c);const j=w[Math.floor(Math.random()*w.length)];
-  const b=$("#o"+j);b.disabled=true;b.classList.add("gone");$("#ai").innerHTML=gx(say("think","حذفتُ لكِ إجابة خاطئة. فكّري في الباقي!"));
+  const b=$("#o"+j);b.disabled=true;b.classList.add("gone");$("#ai").innerHTML=gx(say("think","حذفتُ إجابة خاطئة. بقيت خيارات أقل!"));
 }
 function reportQuestion(){
   const t=Q&&Q.list&&Q.list[Q.i]; if(!t)return;
@@ -619,7 +660,7 @@ function ans(k){
   t.o.forEach((o,j)=>{const b=$("#o"+j);b.disabled=true;if(o.id===t.c){b.classList.add("good");b.insertAdjacentHTML("beforeend",'<span class="sr">، الإجابة الصحيحة</span>')}else if(j===k){b.classList.add("wrong");b.insertAdjacentHTML("beforeend",'<span class="sr">، إجابتك غير صحيحة</span>')}});
   const help=feedbackHelp(t,ok);const tip=help?`<div class="learn"><b>🤖 ${help.title}</b><p>${help.text}</p></div>`:"";
   const correctText=t.o.find(o=>o.id===t.c)?.text||"";
-  $("#fb").innerHTML=gx(`<div class="feedback ${ok?"ok":"no"}">${ok?(Q.combo>=3?"رائع! 🔥 سلسلة إجابات صحيحة":"أحسنتِ! إجابة صحيحة."):"ليست صحيحة. الإجابة الصحيحة: <span dir=\"auto\">"+correctText+"</span>"}</div>${tip}<button class="go" onclick="Q.i++;step()">${Q.i===Q.list.length-1?"النتيجة":"السؤال التالي"}</button><button class="linkbtn" type="button" onclick="reportQuestion()">⚑ الإبلاغ عن مشكلة في السؤال</button>`);
+  $("#fb").innerHTML=gx(`<div class="feedback ${ok?"ok":"no"}">${ok?(Q.combo>=3?"رائع! 🔥 سلسلة إجابات صحيحة":"إجابة صحيحة! 🎉"):"ليست صحيحة. الإجابة الصحيحة: <span dir=\"auto\">"+correctText+"</span>"}</div>${tip}<button class="go" onclick="Q.i++;step()">${Q.i===Q.list.length-1?"النتيجة":"السؤال التالي"}</button><button class="linkbtn" type="button" onclick="reportQuestion()">⚑ الإبلاغ عن مشكلة في السؤال</button>`);
 }
 function finish(){
   const n=Q.list.length,s=Q.score,r=n?s/n:0,sc=r>=1?3:r>=0.8?2:r>=0.5?1:0;let xp=s*10,extra="",nextBtn="";
@@ -634,13 +675,13 @@ function finish(){
   let weak="";
   if(Q.mode==="castle"||Q.mode==="chest"){const tot={};Q.list.forEach(x=>tot[x.lid]=(tot[x.lid]||0)+1);
     const lw=Object.keys(tot).filter(id=>(Q.by[id]||0)/tot[id]<0.5).slice(0,5);
-    weak=lw.length?`<h2 style="margin-top:14px">تحتاج إلى مراجعة</h2>`+lw.map(id=>`<div class="row"><span><b>${LES[id].ls.t}</b><small>${LES[id].c.n}</small></span><button class="pill" onclick="swap(lessonIntro,'${id}')">راجعي</button></div>`).join(""):`<p class="muted" style="text-align:center">أداء ممتاز في جميع الدروس!</p>`}
-  const msg=r>=0.9?"ممتاز! لقد أتممتِ هذه المرحلة ببراعة!":r>=0.6?"أحسنتِ! واصلي التقدّم خطوةً خطوة.":"لا بأس؛ كل محاولة تساعدك على بناء المهارة. جرّبي مرة أخرى!";
+    weak=lw.length?`<h2 style="margin-top:14px">تحتاج إلى مراجعة</h2>`+lw.map(id=>`<div class="row"><span><b>${LES[id].ls.t}</b><small>${LES[id].c.n}</small></span><button class="pill" onclick="swap(lessonIntro,'${id}')">مراجعة</button></div>`).join(""):`<p class="muted" style="text-align:center">أداء ممتاز في جميع الدروس!</p>`}
+  const msg=r>=0.9?"ممتاز! اكتملت هذه المرحلة ببراعة!":r>=0.6?"عمل جميل! والتقدّم يكون خطوةً خطوة.":"لا بأس؛ كل محاولة تبني المهارة. لنحاول مرة أخرى!";
   show(`${say(r>=0.5?"happy":"sad",msg)}<div class="big-score">${s} / ${n}</div>${extra}
   <div class="chips" style="justify-content:center"><span class="chip">+${xp} نقطة ⭐</span>${Q.best>=3?`<span class="chip">🔥 أطول سلسلة ${Q.best}</span>`:""}</div>${weak}
-  ${Q.mode==="lesson"&&sc<3?`<div class="learn"><b>🤖 تعلّمي مع الروبوت</b><p>${LES[Q.id].ls.tip}</p></div>`:""}
-  <aside class="parent"><b>اسألي والدتك أو والدك</b><p>ما السؤال الذي أخطأتِ فيه؟ هل نستطيع أن نتعلم منه معًا؟</p></aside>
-  ${nextBtn}<button class="go ${nextBtn?"alt":""}" onclick="swap(retry)">${Q.mode==="lesson"?"أعيدي المحطة بأسئلة جديدة":"حاولي مرة أخرى"}</button>
+  ${Q.mode==="lesson"&&sc<3?`<div class="learn"><b>🤖 نتعلّم مع الروبوت</b><p>${LES[Q.id].ls.tip}</p></div>`:""}
+  <aside class="parent"><b>👨‍👩‍👧 سؤال للأسرة</b><p>ما السؤال الذي كان صعبًا؟ هل نتعلّم منه معًا؟</p></aside>
+  ${nextBtn}<button class="go ${nextBtn?"alt":""}" onclick="swap(retry)">${Q.mode==="lesson"?"إعادة المحطة بأسئلة جديدة":"محاولة أخرى"}</button>
   <button class="go alt" onclick="back()">${Q.mode==="lesson"||Q.mode==="chest"||Q.mode==="castle"?"العودة إلى الخريطة":"رجوع"}</button>`,{noBack:true});
 }
 function retry(){const m=Q.mode,id=Q.id;({lesson:()=>startLesson(id),chest:()=>startChest(id),castle:()=>startCastle(id),daily:daily,review:review})[m]()}
@@ -670,7 +711,7 @@ function progress(){
   show(`<div class="muted" style="font-weight:700;margin-bottom:6px">${GN[g]}</div><h1>تقرير تقدّمي ذكي</h1>
   <div class="stats"><div><b>${P.xp}</b>نقطة</div><div><b>${st_.a?Math.round(st_.o/st_.a*100):0}%</b>الدقة</div><div><b>${mistN()}</b>دفتر الأخطاء</div><div><b>${due}</b>مراجعة اليوم</div></div>
   <div class="chips"><span class="chip">🏅 ${LEVELS[lv][1]}</span><span class="chip">${streakTxt()}</span><span class="chip">⭐ ${got}/${tot}</span><span class="chip">📌 ${cnt(weak,"مهارة")} تحتاج دعمًا</span></div>
-  <div class="card"><h2>🎯 توصية اليوم</h2><p>${due?`لديك ${cnt(due,"سؤال")} حان وقت مراجعتها. ابدئي من دفتر الأخطاء.`:weak?"تدربي على الأسئلة التي أخطأتِ فيها؛ ستظهر تلقائيًا في المهمة الذكية.":"أجيبي عن مزيد من الأسئلة لتكوين توصية شخصية."}</p><button class="go" onclick="go(daily)">ابدئي المهمة الذكية</button></div>
+  <div class="card"><h2>🎯 توصية اليوم</h2><p>${due?`لديك ${cnt(due,"سؤال")} حان وقت مراجعتها من دفتر الأخطاء.`:weak?"الأسئلة الخاطئة تعود تلقائيًا في المهمة الذكية للتدرّب عليها.":"كلما زادت الإجابات صارت التوصية أدق."}</p><button class="go" onclick="go(daily)">بدء المهمة الذكية</button></div>
   <h2>التقدم حسب الكتاب</h2>${bs.map(b=>{const ls=lessonsOf(b),ss=ls.reduce((a,l)=>a+stars(l.id),0),d=ls.filter(l=>stars(l.id)>0).length;return `<div class="row"><span><b>${b.e} ${b.n}</b><small>${d} من ${cnt(ls.length,"درس")} · ${ss}/${ls.length*3} ⭐</small></span></div>`}).join("")}
   <h2 style="margin-top:14px">🏆 الإنجازات</h2>${badges}
   <button class="go alt" onclick="go(skillMap)">🧭 خريطة المهارات</button><button class="go alt" onclick="window.print()">🖨️ طباعة التقرير</button><button class="go alt" onclick="back()">رجوع</button>`);
@@ -679,9 +720,9 @@ function progress(){
 const SHARE='<svg width="26" height="26" viewBox="0 0 24 24" style="vertical-align:middle" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15V3M8 7l4-4 4 4"/><path d="M6 11H5a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-8a1 1 0 0 0-1-1h-1"/></svg>';
 function doInstall(){if(!deferred)return;deferred.prompt();deferred.userChoice.finally(()=>{deferred=null;swap(install)})}
 function install(){
-  if(isStandalone())return show(`${say("happy","التطبيق مثبّت على جهازك بالفعل 🎉")}<button class="go" onclick="swap(home)">ابدئي الرحلة</button>`);
-  const ios=`<div class="card"><h2>🍎 آيفون وآيباد</h2><ol class="steps"><li>افتحي رابط التطبيق في متصفح <b>Safari</b>.</li><li>اضغطي زر المشاركة ${SHARE} في أسفل الشاشة.</li><li>مرّري للأسفل واختاري <b>«إضافة إلى الشاشة الرئيسية»</b>.</li><li>اضغطي <b>«إضافة»</b>، فيظهر رمز التطبيق على شاشتك.</li></ol></div>`;
-  const and=`<div class="card"><h2>🤖 أندرويد</h2>${deferred?`<button class="go" onclick="doInstall()">📲 ثبّتي التطبيق الآن</button><p class="muted" style="text-align:center">أو اتبعي الخطوات:</p>`:""}<ol class="steps"><li>افتحي رابط التطبيق في متصفح <b>Chrome</b>.</li><li>اضغطي زر القائمة <b>⋮</b> في أعلى الشاشة.</li><li>اختاري <b>«تثبيت التطبيق»</b> أو <b>«إضافة إلى الشاشة الرئيسية»</b>.</li><li>اضغطي <b>«تثبيت»</b>، فيظهر الرمز على شاشتك.</li></ol></div>`;
+  if(isStandalone())return show(`${say("happy","التطبيق مثبّت على جهازك بالفعل 🎉")}<button class="go" onclick="swap(home)">بدء الرحلة</button>`);
+  const ios=`<div class="card"><h2>🍎 آيفون وآيباد</h2><ol class="steps"><li>افتحوا رابط التطبيق في متصفح <b>Safari</b>.</li><li>اضغطوا زر المشاركة ${SHARE} في أسفل الشاشة.</li><li>مرّروا للأسفل واختاروا <b>«إضافة إلى الشاشة الرئيسية»</b>.</li><li>اضغطوا <b>«إضافة»</b>، فيظهر رمز التطبيق على شاشتك.</li></ol></div>`;
+  const and=`<div class="card"><h2>🤖 أندرويد</h2>${deferred?`<button class="go" onclick="doInstall()">📲 تثبيت التطبيق الآن</button><p class="muted" style="text-align:center">أو اتبعوا الخطوات:</p>`:""}<ol class="steps"><li>افتحوا رابط التطبيق في متصفح <b>Chrome</b>.</li><li>اضغطوا زر القائمة <b>⋮</b> في أعلى الشاشة.</li><li>اختاروا <b>«تثبيت التطبيق»</b> أو <b>«إضافة إلى الشاشة الرئيسية»</b>.</li><li>اضغطوا <b>«تثبيت»</b>، فيظهر الرمز على شاشتك.</li></ol></div>`;
   show(`<div class="inst-head"><img class="appicon" src="${ICON}" alt="رمز التطبيق"><div><h1>ضعيه كأيقونة على شاشتك</h1><p class="muted">بعد التثبيت يفتح مثل أي تطبيق، ويعمل بدون إنترنت.</p></div></div>${isIOS()?ios+and:and+ios}<button class="go alt" onclick="back()">رجوع</button>`);
 }
 
@@ -699,12 +740,12 @@ function about(){
   <div class="card"><h2>🔒 الخصوصية</h2><ul><li>لا يطلب التطبيق اسمًا ولا بريدًا ولا أي حساب.</li><li>لا يجمع بيانات شخصية، ولا يستخدم أدوات تتبّع أو تحليلات، ولا يعرض إعلانات، ولا توجد مشتريات داخله.</li><li>يُحفظ تقدّم الطفل (النجوم والنقاط والنتائج ودفتر الأخطاء) على هذا الجهاز فقط، ولا يُرسل إلى أي جهة.</li><li>لا يتصل التطبيق بأي موقع آخر، ويعمل بدون إنترنت بعد أول تشغيل. أما زر «الإبلاغ عن مشكلة» فيفتح تطبيق البريد برسالة جاهزة إلى المطوّر، ولا يُرسَل شيء إلا إذا ضغطتم «إرسال» بأنفسكم.</li><li>يمكنكم مسح كل ما حُفظ في أي وقت بالزر أدناه.</li></ul>
   <p class="fine">قد يسجّل مزوّد استضافة الصفحة زيارات تقنية عامة كأي موقع إلكتروني، وليس للتطبيق وصول إليها. يعمل التطبيق دون إنترنت بعد أول تشغيل.${APP.privacyPage?` <a href="privacy.html">صفحة الخصوصية الكاملة</a>`:""}</p></div>
   <div class="card"><h2>⚠️ إخلاء المسؤولية</h2><ul><li>تطبيق تعليمي مجتمعي مستقل، وليس تابعًا لهيئة تقويم التعليم والتدريب ولا لوزارة التعليم، ولا معتمدًا منهما.</li><li>اسم «نافس» يُستخدم لوصف نوع الاختبارات فقط.</li><li>جميع الأسئلة من إعداد مطوّر التطبيق على نمط المهارات المعلنة، وهي ليست أسئلة رسمية ولا تتنبأ بأسئلة الاختبار الفعلي.</li><li>النجوم والنقاط للتدريب فقط، وليست تقييمًا رسميًا لمستوى الطالب.</li><li>بذلنا جهدنا للدقة، لكن قد توجد أخطاء أو صياغات تحتاج إلى تحسين. نوصي بمراجعة المعلمة للمحتوى، ويمكن الإبلاغ عن السؤال من زر «الإبلاغ عن مشكلة» أثناء التدريب، فيُفتح البريد برسالة جاهزة فيها بيانات السؤال.</li></ul></div>
-  <div class="card"><h2>👨‍👩‍👧 لأولياء الأمور</h2><p>اجلسوا مع طفلكم، واطلبوا منه أن يشرح لكم إجاباته ويراجع دفتر الأخطاء، وخصّصوا وقتًا قصيرًا للتدريب كل يوم. تقرير «تقدّمي» يمكن طباعته أو حفظه. ولتغيير صيغة الخطاب (طالبة / طالب) استخدموا الرابط أسفل الشاشة الرئيسية.</p></div>
+  <div class="card"><h2>👨‍👩‍👧 لأولياء الأمور</h2><p>اجلسوا مع طفلكم، واطلبوا منه أن يشرح لكم إجاباته ويراجع دفتر الأخطاء، وخصّصوا وقتًا قصيرًا للتدريب كل يوم. تقرير «تقدّمي» يمكن طباعته أو حفظه.</p></div>
   <div class="card"><h2>ℹ️ المطوّر والاعتمادات</h2><ul><li><b>فكرة وتطوير:</b> ${APP.dev}</li>${APP.contact?`<li><b>للتواصل:</b> <a href="mailto:${APP.contact}" dir="ltr">${APP.contact}</a></li>`:""}<li>© ${APP.year} جميع الحقوق محفوظة للمطوّر.</li><li>الخطان: Cairo وNoto Naskh Arabic (للنصوص المشكولة)، مرخّصان بموجب رخصة SIL Open Font License 1.1.</li></ul></div>
   <button class="go alt" id="rst" onclick="resetData()">🗑️ مسح تقدّمي من هذا الجهاز</button><button class="go" onclick="back()">رجوع</button>`);
 }
 function resetData(){
-  if(!rst){rst=true;const b=$("#rst");if(b)b.textContent=gx("اضغطي مرة أخرى للتأكيد: سيُمسح كل التقدّم");return}
+  if(!rst){rst=true;const b=$("#rst");if(b)b.textContent=gx("اضغطوا مرة أخرى للتأكيد: سيُمسح كل التقدّم");return}
   rst=false;P={};try{localStorage.removeItem("skj2")}catch(e){}["stars","chest","castle","mist"].forEach(k=>P[k]={});P.xp=0;P.stats={a:0,o:0};P.streak={d:"",n:0};stack=[];swap(home)
 }
 swap(home);
