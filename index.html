@@ -332,6 +332,23 @@ footer .linkbtn{font-size:13px}
 .exam-rev summary{cursor:pointer;font-weight:700;line-height:1.7}.exam-rev p{margin:6px 0}
 
 .fam-lead{font-size:18px;line-height:1.8}.fam h3{margin:12px 0 4px;font-size:16px}.fam ul,.card ul{margin:4px 0;padding-inline-start:20px;line-height:1.9}.fam small{color:var(--ink2)}
+
+/* ===== توحيد الشاشات الداخلية مع تصميم الرئيسية ===== */
+.hm-grade.s-ma{--g1:#FF9F43;--g2:#FF6B6B}.hm-grade.s-ar{--g1:#14A39A;--g2:#0B67D1}.hm-grade.s-sc{--g1:#7C5CFF;--g2:#3E8BFF}
+.go{border-radius:18px;border:0;background:linear-gradient(135deg,#0B67D1,#1688D9);color:#fff;box-shadow:0 6px 14px rgba(11,103,209,.25)}
+.go.alt{background:var(--card);color:var(--ink);border:1px solid var(--line);box-shadow:0 4px 12px rgba(31,82,126,.08)}
+.go:active,.go.alt:active{transform:translateY(1px);box-shadow:0 2px 6px rgba(31,82,126,.15)}
+.card,.row,.achievement,.mock-card{border-radius:20px;border:1px solid var(--line);box-shadow:0 4px 12px rgba(31,82,126,.07)}
+.city{border-radius:22px;border:1px solid var(--line);box-shadow:0 6px 16px rgba(31,82,126,.10)}
+.part{border:0;border-radius:20px;color:#fff;background:linear-gradient(135deg,#0B67D1 0%,#0E4FA8 50%,#14A39A 100%);box-shadow:0 8px 20px rgba(11,103,209,.25)}
+.castle{border:0;border-radius:20px;background:linear-gradient(135deg,#FFD566,#FFB347);color:#3A2600;box-shadow:0 6px 16px rgba(255,159,67,.30)}
+.castle.locked{background:var(--card);color:var(--ink2);border:1px dashed var(--line);box-shadow:none}
+.chest{border-radius:16px;border:1px solid var(--line);box-shadow:0 3px 10px rgba(31,82,126,.08)}
+.opt{border-radius:16px;box-shadow:0 3px 10px rgba(31,82,126,.07)}
+.opt:active{transform:translateY(1px)}
+.bubble{border-radius:22px 22px 22px 8px;box-shadow:0 6px 16px rgba(31,82,126,.08)}
+.prog{border-radius:999px;overflow:hidden}.prog i{background:linear-gradient(90deg,#14A39A,#0B67D1)}
+.passage{border-radius:18px;border:1px solid var(--line)}
 </style>
 
 </head>
@@ -576,8 +593,8 @@ function home(){
 function books(g){
   const bs=BOOKS.filter(b=>b.g===g);
   show(`<div class="muted" style="font-weight:700;margin-bottom:6px">${GN[g]}</div>${say("happy","إلى أين نذهب اليوم؟ لنختر الكتاب:")}
-  <div class="stack">${bs.map(b=>{const ls=lessonsOf(b),tot=ls.length*3,got=ls.reduce((a,l)=>a+stars(l.id),0);
-    return `<button class="big" onclick="go(journey,'${b.id}')"><span><b>${b.n}</b><small>${b.parts.length===2?"جزءان":b.parts.length+" أجزاء"} · ${cnt(ls.length,"درس")} · ${cnt(qcount(b),"سؤال")}</small><div class="bar"><i style="width:${tot?got/tot*100:0}%"></i></div></span><span class="e" aria-hidden="true">${b.e}</span></button>`}).join("")}</div>`);
+  <div class="hm-grades">${bs.map(b=>{const ls=lessonsOf(b),tot=ls.length*3,got=ls.reduce((a,l)=>a+stars(l.id),0);
+    const p=tot?Math.round(got/tot*100):0;return `<button class="hm-grade s-${b.sid}" onclick="go(journey,'${b.id}')"><span class="hm-num" aria-hidden="true" style="font-size:30px">${b.e}</span><span class="hm-gbody"><b>${b.n}</b><small>${b.parts.length===2?"جزءان":b.parts.length+" أجزاء"} · ${cnt(ls.length,"درس")} · ${cnt(qcount(b),"سؤال")}</small><span class="hm-gbar"><i style="width:${p}%"></i></span><small>الإنجاز ${p}%</small></span><span class="hm-go" aria-hidden="true">‹</span></button>`}).join("")}</div>`);
 }
 function nextStop(b){const ls=lessonsOf(b);return ls.find(l=>!stars(l.id))||ls.find(l=>stars(l.id)<3)||null}
 const mist=()=>Object.keys(P.mist).filter(k=>LES[k.split("#")[0]]&&LES[k.split("#")[0]].bk.g===(P.grade||0));
