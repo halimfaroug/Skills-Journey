@@ -1,9 +1,11 @@
-const CACHE = 'skills-journey-clean-v26';
+const CACHE = 'skills-journey-clean-v27';
 const CORE = [
   './',
   './manifest.webmanifest',
   './index.html',
-  './qr.js'
+  './qr.js',
+  './data/g3.js',
+  './data/g6.js'
 ];
 self.addEventListener('install', event => {
   event.waitUntil(caches.open(CACHE).then(cache => cache.addAll(CORE)).then(() => self.skipWaiting()));
