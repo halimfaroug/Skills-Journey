@@ -349,6 +349,7 @@ footer .linkbtn{font-size:13px}
 .bubble{border-radius:22px 22px 22px 8px;box-shadow:0 6px 16px rgba(31,82,126,.08)}
 .prog{border-radius:999px;overflow:hidden}.prog i{background:linear-gradient(90deg,#14A39A,#0B67D1)}
 .passage{border-radius:18px;border:1px solid var(--line)}
+.expr.list{white-space:normal}
 </style>
 
 </head>
@@ -475,7 +476,7 @@ function numHTML(seg,iso){
   h=h.replace(/(^|[\s(=:،])[-−](\d+(?:\.\d+)?)(?![\d\/])/g,(m,p,n)=>`${p}<bdi dir="ltr">−${n}</bdi>`);
   h=h.replace(/[⁰¹²³⁴⁵⁶⁷⁸⁹]+/g,m=>"<sup>"+[...m].map(c=>SUPM[c]).join("")+"</sup>");
   h=h.replace(/(<[^>]+>)|([^<]+)/g,(m,tag,txt)=>tag||toAD(txt));
-  return iso?`<span class="expr">${h}</span>`:h;
+  return iso?`<span class="expr${(String(seg).match(/ ، /g)||[]).length>=4?" list":""}">${h}</span>`:h;
 }
 const NUMRX=/[0-9⁦-⁩⁰¹²³⁴⁵⁶⁷⁸⁹%]/;
 function arabizeText(n){
