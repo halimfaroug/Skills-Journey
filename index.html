@@ -350,6 +350,12 @@ footer .linkbtn{font-size:13px}
 .prog{border-radius:999px;overflow:hidden}.prog i{background:linear-gradient(90deg,#14A39A,#0B67D1)}
 .passage{border-radius:18px;border:1px solid var(--line)}
 .expr.list{white-space:normal}
+
+.dl-btn{font:inherit;font-weight:900;font-size:14px;color:#fff;border:0;border-radius:999px;padding:6px 12px;cursor:pointer;background:linear-gradient(135deg,#FF7A45,#FF4D6D);box-shadow:0 4px 12px rgba(255,77,109,.35);display:inline-flex;align-items:center;gap:4px;white-space:nowrap;animation:dlpulse 2.4s ease-in-out infinite}
+.dl-btn[hidden]{display:none}
+@keyframes dlpulse{0%,100%{transform:scale(1)}50%{transform:scale(1.06)}}
+@media (prefers-reduced-motion: reduce){.dl-btn{animation:none}}
+@media (max-width:370px){.top .brand{font-size:16px}.dl-btn{padding:6px 10px;font-size:13px}}
 </style>
 
 </head>
@@ -359,6 +365,7 @@ footer .linkbtn{font-size:13px}
   <div class="brand">رحلة المهارات</div>
   <button class="pill" id="info" onclick="go(about)" aria-label="عن التطبيق والخصوصية">ℹ️</button>
   <div class="xp" aria-label="النقاط">⭐ <span id="xpv">0</span></div>
+  <button class="dl-btn" id="dl" onclick="quickInstall()" hidden aria-label="تحميل التطبيق على الجهاز">📲 <span>تحميل</span></button>
 </header>
 <main id="app"></main>
 <div id="fx" aria-hidden="true"></div>
@@ -517,7 +524,8 @@ const ua=(typeof navigator!=="undefined"&&navigator.userAgent)||"";
 const isIOS=()=>/iphone|ipad|ipod/i.test(ua)||(typeof navigator!=="undefined"&&navigator.platform==="MacIntel"&&navigator.maxTouchPoints>1);
 if(typeof window!=="undefined"&&window.addEventListener){
   window.addEventListener("beforeinstallprompt",e=>{e.preventDefault();deferred=e;if(cur&&(cur.fn===home||cur.fn===install))swap(cur.fn,...cur.a)});
-  window.addEventListener("appinstalled",()=>{deferred=null});
+  window.addEventListener("appinstalled",()=>{deferred=null;dlUpdate();toast("تم تحميل التطبيق على جهازك 🎉")});
+  window.addEventListener("beforeinstallprompt",()=>setTimeout(dlUpdate,0));
 }
 function burst(){const f=$("#fx");if(!f)return;const em=["🎉","⭐","✨","🌟","🎈"];f.innerHTML="";for(let i=0;i<22;i++){const s=document.createElement("span");s.textContent=em[i%em.length];s.style.left=(Math.random()*95)+"%";s.style.animationDelay=(Math.random()*.6)+"s";f.appendChild(s)}setTimeout(()=>{f.innerHTML=""},3200)}
 
@@ -868,11 +876,18 @@ function progress(){
 /* ======================== التثبيت ======================== */
 const SHARE='<svg width="26" height="26" viewBox="0 0 24 24" style="vertical-align:middle" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15V3M8 7l4-4 4 4"/><path d="M6 11H5a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-8a1 1 0 0 0-1-1h-1"/></svg>';
 function doInstall(){if(!deferred)return;deferred.prompt();deferred.userChoice.finally(()=>{deferred=null;swap(install)})}
+
+/* زر التحميل في أعلى الشاشة */
+function dlUpdate(){const b=document.getElementById("dl");if(b)b.hidden=isStandalone()}
+function quickInstall(){
+  if(deferred){deferred.prompt();deferred.userChoice.then(r=>{if(r&&r.outcome==="accepted")toast("جارٍ تحميل التطبيق… 🎉")}).finally(()=>{deferred=null;dlUpdate()});return}
+  go(install);
+}
 function install(){
   if(isStandalone())return show(`${say("happy","التطبيق مثبّت على جهازك بالفعل 🎉")}<button class="go" onclick="swap(home)">بدء الرحلة</button>`);
   const ios=`<div class="card"><h2>🍎 آيفون وآيباد</h2><ol class="steps"><li>افتحوا رابط التطبيق في متصفح <b>Safari</b>.</li><li>اضغطوا زر المشاركة ${SHARE} في أسفل الشاشة.</li><li>مرّروا للأسفل واختاروا <b>«إضافة إلى الشاشة الرئيسية»</b>.</li><li>اضغطوا <b>«إضافة»</b>، فيظهر رمز التطبيق على شاشتك.</li></ol></div>`;
   const and=`<div class="card"><h2>🤖 أندرويد</h2>${deferred?`<button class="go" onclick="doInstall()">📲 تثبيت التطبيق الآن</button><p class="muted" style="text-align:center">أو اتبعوا الخطوات:</p>`:""}<ol class="steps"><li>افتحوا رابط التطبيق في متصفح <b>Chrome</b>.</li><li>اضغطوا زر القائمة <b>⋮</b> في أعلى الشاشة.</li><li>اختاروا <b>«تثبيت التطبيق»</b> أو <b>«إضافة إلى الشاشة الرئيسية»</b>.</li><li>اضغطوا <b>«تثبيت»</b>، فيظهر الرمز على شاشتك.</li></ol></div>`;
-  show(`<div class="inst-head"><img class="appicon" src="${ICON}" alt="رمز التطبيق"><div><h1>ضعيه كأيقونة على شاشتك</h1><p class="muted">بعد التثبيت يفتح مثل أي تطبيق، ويعمل بدون إنترنت.</p></div></div>${isIOS()?ios+and:and+ios}<button class="go alt" onclick="back()">رجوع</button>`);
+  show(`<div class="inst-head"><img class="appicon" src="${ICON}" alt="رمز التطبيق"><div><h1>تحميل التطبيق على الجهاز</h1><p class="muted">بعد التثبيت يفتح مثل أي تطبيق، ويعمل بدون إنترنت.</p></div></div>${isIOS()?ios+and:and+ios}<button class="go alt" onclick="back()">رجوع</button>`);
 }
 
 /* ======================== عن التطبيق ======================== */
@@ -897,7 +912,7 @@ function resetData(){
   if(!rst){rst=true;const b=$("#rst");if(b)b.textContent=gx("اضغطوا مرة أخرى للتأكيد: سيُمسح كل التقدّم");return}
   rst=false;try{localStorage.removeItem("skj2")}catch(e){}P=normalizeProgress({});stack=[];swap(home)
 }
-(function(){const h=location.hash||"";if(h.startsWith("#t=")){cur={fn:home,a:[]};teacherView(h.slice(3))}else swap(home)})();
+(function(){dlUpdate();const h=location.hash||"";if(h.startsWith("#t=")){cur={fn:home,a:[]};teacherView(h.slice(3))}else swap(home)})();
 </script>
 
 <script>if("serviceWorker" in navigator && location.protocol !== "file:"){navigator.serviceWorker.register("sw.js",{updateViaCache:"none"}).then(reg=>{if(reg.waiting){const n=document.createElement("div");n.className="update-note";n.innerHTML="يتوفر تحديث جديد للتطبيق <button type=\"button\">تحديث الآن</button>";n.querySelector("button").onclick=()=>{reg.waiting.postMessage({type:"SKIP_WAITING"});location.reload()};document.body.appendChild(n)}reg.addEventListener("updatefound",()=>{const w=reg.installing;if(w)w.addEventListener("statechange",()=>{if(w.state==="installed"&&navigator.serviceWorker.controller){const n=document.createElement("div");n.className="update-note";n.innerHTML="تم تجهيز تحديث جديد <button type=\"button\">تحديث الآن</button>";n.querySelector("button").onclick=()=>location.reload();document.body.appendChild(n)}})})}).catch(()=>{});}</script></body>

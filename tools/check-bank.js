@@ -26,7 +26,7 @@ const html=fs.readFileSync(path.join(root,"index.html"),"utf8");
 const scripts=[...html.matchAll(/<script>([\s\S]*?)<\/script>/g)].map(m=>m[1]);
 scripts.forEach((src,i)=>{try{new vm.Script(src,{filename:`index.html script ${i+1}`})}catch(e){errors.push(`خطأ في نص البرنامج ${i+1}: ${e.message}`)}});
 const ui=scripts.join("\n");
-const gendered=["اختاري","أجيبي","ابدئي","أكملي","اضغطي","انطلقي","حدّدي","أحسنتِ","أنتِ","لكِ","لديكِ","تحتاجين","تريدين","طالب أم طالبة"];
+const gendered=["اختاري","أجيبي","ابدئي","أكملي","اضغطي","انطلقي","حدّدي","أحسنتِ","أنتِ","لكِ","لديكِ","تحتاجين","تريدين","طالب أم طالبة","ضعيه","افتحي","اتبعي","ثبّتي","جرّبي","راجعي"];
 gendered.forEach(w=>{if(ui.includes(w))errors.push(`صيغة خطاب غير محايدة في الواجهة: «${w}»`)});
 const sw=fs.readFileSync(path.join(root,"sw.js"),"utf8");
 files.forEach(f=>{if(!sw.includes(`./data/${f}`))errors.push(`sw.js لا يخزّن data/${f} للعمل دون اتصال`)});
