@@ -144,6 +144,5 @@ All application content and code remain under the ownership of the project creat
 
 - `index.html`: الواجهة والمنطق.
 - `data/g3.js` و`data/g6.js`: بنك الأسئلة لكل صف.
-- `qr.js`: مكتبة رمز QR (MIT) تُحمَّل عند الحاجة فقط.
 - `sw.js`: التخزين للعمل دون اتصال؛ يجب رفع رقم الإصدار مع كل تحديث.
 - `tools/check-bank.js`: فحص آلي يعمل في GitHub Actions مع كل تحديث (معرّفات مكررة، إجابات غير موجودة في الخيارات، خيارات متطابقة، أخطاء برمجية، صيغ خطاب غير محايدة، ملفات مفقودة).

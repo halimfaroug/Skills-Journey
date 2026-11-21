@@ -1,9 +1,8 @@
-const CACHE = 'skills-journey-clean-v29';
+const CACHE = 'skills-journey-clean-v30';
 const CORE = [
   './',
   './manifest.webmanifest',
   './index.html',
-  './qr.js',
   './data/g3.js',
   './data/g6.js'
 ];

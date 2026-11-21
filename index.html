@@ -594,12 +594,9 @@ function home(){
     <button onclick="go(progress)"><span>📈</span>تقدّمي</button>
     <button onclick="go(skillMap)"><span>🧭</span>خريطة المهارات</button>
     <button onclick="go(family)"><span>👨‍👩‍👧</span>ملخّص الأسرة</button>
-    <button onclick="go(teacherCode)"><span>📱</span>رمز المعلمة</button>
-    <button onclick="go(settings)"><span>⚙️</span>تخصيص</button>
   </div>
   <div class="hm-level"><span>${TR[lv]} مرحلة «${LEVELS[lv][1]}»</span><span class="hm-gbar"><i style="width:${lvPct}%"></i></span><small>${next?`تبقّى ${next[0]-P.xp} نقطة للانتقال إلى ${TR[lv+1]} مرحلة «${next[1]}»`:"اكتملت كل المراحل! 🏆"}</small></div>
-  ${isStandalone()?"":`<button class="go alt" onclick="go(install)">📲 إضافة التطبيق إلى الشاشة الرئيسية</button>`}
-  <footer>أسئلة تدريبية أصلية مستوحاة من المهارات العامة للاختبارات الوطنية «نافس» وليست أسئلة رسمية · بدون حساب وبدون إعلانات<br><button class="linkbtn" onclick="go(about)">عن التطبيق · الخصوصية</button> · <a class="linkbtn" href="https://kalimati-crafter.vercel.app/" target="_blank" rel="noopener">تطبيق آخر للمفردات الإنجليزية: كلماتي ↗</a></footer>`);
+  <footer>أسئلة تدريبية أصلية مستوحاة من المهارات العامة للاختبارات الوطنية «نافس» وليست أسئلة رسمية · بدون حساب وبدون إعلانات<br><button class="linkbtn" onclick="go(settings)">⚙️ تخصيص</button> · <button class="linkbtn" onclick="go(about)">عن التطبيق · الخصوصية</button> · <a class="linkbtn" href="https://kalimati-crafter.vercel.app/" target="_blank" rel="noopener">تطبيق آخر للمفردات الإنجليزية: كلماتي ↗</a></footer>`);
 }
 function books(g){
   const bs=BOOKS.filter(b=>b.g===g);
@@ -794,7 +791,7 @@ function examFinish(timeUp){
   <button class="go" onclick="swap(retry)">اختبار جديد بأسئلة مختلفة</button><button class="go alt" onclick="swap(home)">الشاشة الرئيسية</button>`,{noBack:true});
 }
 
-/* ======================== ملخّص الأسرة ورمز المعلمة ======================== */
+/* ======================== ملخّص الأسرة ======================== */
 const QIX={};BOOKS.forEach(b=>lessonsOf(b).forEach(l=>l.q.forEach(q=>{QIX[q.id]=l.id})));
 function chapterStats(g){const m={};for(const id in P.qstats){const lid=QIX[id];if(!lid)continue;const o=LES[lid];if(g&&o.bk.g!==g)continue;const k=o.c.id;const x=P.qstats[id];m[k]=m[k]||{id:k,n:o.c.n,b:o.bk.n,a:0,o:0};m[k].a+=x.a;m[k].o+=x.o}return Object.values(m)}
 function familySummary(g){
@@ -816,32 +813,8 @@ function family(){
   ${f.ex.length?`<h3>📝 الاختبارات التجريبية</h3><p>آخر نتيجة: ${f.ex[f.ex.length-1].sn} ${Math.round(f.ex[f.ex.length-1].s/f.ex[f.ex.length-1].n*100)}%. ${trend}</p>`:""}
   </div>`}
   <div class="card"><h3>✅ ما ننصح به</h3><ul><li>تدريب 15 دقيقة يوميًّا، خمسة أيام في الأسبوع.</li><li>${f.weak.length?`البدء بـ«${f.weak[0].n}» من خلال «مهمة اليوم».`:"إكمال المحطات التالية في الرحلة."}</li><li>مراجعة «دفتر الأخطاء» معًا مرة في الأسبوع، واختبار تجريبي كل أسبوعين.</li></ul></div>
-  <button class="go" onclick="go(teacherCode)">📱 رمز للمعلمة (QR)</button>
   <button class="go alt" onclick="window.print()">🖨️ طباعة الملخّص</button>
   <p class="fine">كل البيانات محفوظة على هذا الجهاز فقط، ولا تُرسل إلى أي جهة.</p>`);
-}
-const b64u=t=>btoa(unescape(encodeURIComponent(t))).replace(/\+/g,"-").replace(/\//g,"_").replace(/=+$/,"");
-const unb64u=t=>decodeURIComponent(escape(atob(t.replace(/-/g,"+").replace(/_/g,"/"))));
-function teacherPayload(g){const cs=chapterStats(g).sort((a,b)=>b.a-a.a).slice(0,14).map(c=>[c.id,c.a,c.o]);
-  return {v:1,g,d:today(),x:P.xp,k:streakN(),c:cs,e:P.exams.filter(x=>x.g===g).slice(-4).map(x=>[x.sid,x.s,x.n,x.d])}}
-function loadQR(cb){if(window.qrcode)return cb();const sc=document.createElement("script");sc.src="qr.js";sc.onload=cb;sc.onerror=()=>toast("تعذّر تحميل مولّد الرمز؛ تأكّدوا من الاتصال ثم أعيدوا المحاولة.");document.head.appendChild(sc)}
-function teacherCode(){
-  const g=P.grade||GR[0],url=location.origin+location.pathname.replace(/index\.html$/,"")+"#t="+b64u(JSON.stringify(teacherPayload(g)));
-  show(`<h1>📱 رمز للمعلمة</h1><p class="fine">تمسح المعلمة هذا الرمز بكاميرا جوالها، فيظهر لها ملخّص المهارات (${GN[g]}) دون حساب ودون إرسال أي بيانات إلى خادم: الملخّص كله داخل الرمز نفسه.</p>
-  <div class="card" style="text-align:center"><div id="qrbox" style="display:inline-block;background:#fff;padding:10px;border-radius:12px">جارٍ إنشاء الرمز…</div></div>
-  <button class="go alt" onclick="navigator.clipboard&&navigator.clipboard.writeText('${url}').then(()=>toast('نُسخ الرابط'))">🔗 نسخ الرابط بدل الرمز</button><div id="toast"></div>`);
-  loadQR(()=>{try{const q=qrcode(0,"L");q.addData(url);q.make();$("#qrbox").innerHTML=q.createSvgTag({cellSize:4,margin:2,scalable:true});const sv=$("#qrbox svg");if(sv){sv.style.width="260px";sv.style.height="260px"}}catch(e){$("#qrbox").textContent="الملخّص أكبر من سعة الرمز؛ استخدموا نسخ الرابط."}});
-}
-function teacherView(data){
-  let d;try{d=JSON.parse(unb64u(data))}catch(e){return show(`<h1>رمز غير صالح</h1><button class="go" onclick="location.hash='';swap(home)">الشاشة الرئيسية</button>`)}
-  const rows=(d.c||[]).filter(c=>CHP[c[0]]).map(c=>({n:CHP[c[0]].c.n,b:CHP[c[0]].bk.n,a:c[1],o:c[2],p:c[1]?Math.round(c[2]/c[1]*100):0})).sort((a,b)=>a.p-b.p);
-  const A=rows.reduce((x,r)=>x+r.a,0),O=rows.reduce((x,r)=>x+r.o,0);
-  show(`<div class="muted" style="font-weight:700">عرض المعلمة · للقراءة فقط</div><h1>ملخّص مهارات الطالب/الطالبة</h1>
-  <div class="chips"><span class="chip">${GN[d.g]||""}</span><span class="chip">تاريخ الملخّص: ${d.d}</span><span class="chip">${A} سؤالًا · دقة ${A?Math.round(O/A*100):0}%</span><span class="chip">🔥 تدريب متتالٍ: ${cnt(d.k||0,"يوم")}</span></div>
-  <h2>المهارات (من الأضعف إلى الأقوى)</h2>${rows.map(r=>`<div class="row"><span><b>${r.n}</b><small>${r.b} · ${r.o} من ${r.a}</small><span class="hm-gbar" style="margin-top:4px"><i style="width:${r.p}%"></i></span></span><b>${r.p}%</b></div>`).join("")||"<p>لا توجد بيانات.</p>"}
-  ${(d.e||[]).length?`<h2 style="margin-top:14px">الاختبارات التجريبية</h2>${d.e.map(x=>{const b=BOOKS.find(y=>y.g===d.g&&y.sid===x[0]);return `<div class="row"><span><b>${b?b.n:x[0]}</b><small>${x[3]}</small></span><b>${x[1]}/${x[2]}</b></div>`}).join("")}`:""}
-  <p class="fine">المهارات التي دقتها أقل من 60% تحتاج إلى دعم. البيانات من جهاز الطالب/الطالبة ولم تُحفظ على هذا الجهاز.</p>
-  <button class="go alt" onclick="location.hash='';swap(home)">فتح التطبيق</button>`,{noBack:true});
 }
 /* ======================== تقدّمي ======================== */
 function passport(){
@@ -871,7 +844,7 @@ function progress(){
   <div class="card"><h2>🎯 توصية اليوم</h2><p>${due?`لديك ${cnt(due,"سؤال")} حان وقت مراجعتها من دفتر الأخطاء.`:weak?"الأسئلة الخاطئة تعود تلقائيًا في المهمة الذكية للتدرّب عليها.":"كلما زادت الإجابات صارت التوصية أدق."}</p><button class="go" onclick="go(daily)">بدء المهمة الذكية</button></div>
   <h2>التقدم حسب الكتاب</h2>${bs.map(b=>{const ls=lessonsOf(b),ss=ls.reduce((a,l)=>a+stars(l.id),0),d=ls.filter(l=>stars(l.id)>0).length;return `<div class="row"><span><b>${b.e} ${b.n}</b><small>${d} من ${cnt(ls.length,"درس")} · ${ss}/${ls.length*3} ⭐</small></span></div>`}).join("")}
   <h2 style="margin-top:14px">🏆 الإنجازات</h2>${badges}
-  <button class="go" onclick="go(family)">👨‍👩‍👧 ملخّص للأسرة ورمز للمعلمة</button><button class="go alt" onclick="go(skillMap)">🧭 خريطة المهارات</button><button class="go alt" onclick="window.print()">🖨️ طباعة التقرير</button><button class="go alt" onclick="back()">رجوع</button>`);
+  <button class="go" onclick="go(family)">👨‍👩‍👧 ملخّص للأسرة</button><button class="go alt" onclick="go(skillMap)">🧭 خريطة المهارات</button><button class="go alt" onclick="window.print()">🖨️ طباعة التقرير</button><button class="go alt" onclick="back()">رجوع</button>`);
 }
 /* ======================== التثبيت ======================== */
 const SHARE='<svg width="26" height="26" viewBox="0 0 24 24" style="vertical-align:middle" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15V3M8 7l4-4 4 4"/><path d="M6 11H5a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-8a1 1 0 0 0-1-1h-1"/></svg>';
@@ -912,7 +885,7 @@ function resetData(){
   if(!rst){rst=true;const b=$("#rst");if(b)b.textContent=gx("اضغطوا مرة أخرى للتأكيد: سيُمسح كل التقدّم");return}
   rst=false;try{localStorage.removeItem("skj2")}catch(e){}P=normalizeProgress({});stack=[];swap(home)
 }
-(function(){dlUpdate();const h=location.hash||"";if(h.startsWith("#t=")){cur={fn:home,a:[]};teacherView(h.slice(3))}else swap(home)})();
+(function(){dlUpdate();swap(home)})();
 </script>
 
 <script>if("serviceWorker" in navigator && location.protocol !== "file:"){navigator.serviceWorker.register("sw.js",{updateViaCache:"none"}).then(reg=>{if(reg.waiting){const n=document.createElement("div");n.className="update-note";n.innerHTML="يتوفر تحديث جديد للتطبيق <button type=\"button\">تحديث الآن</button>";n.querySelector("button").onclick=()=>{reg.waiting.postMessage({type:"SKIP_WAITING"});location.reload()};document.body.appendChild(n)}reg.addEventListener("updatefound",()=>{const w=reg.installing;if(w)w.addEventListener("statechange",()=>{if(w.state==="installed"&&navigator.serviceWorker.controller){const n=document.createElement("div");n.className="update-note";n.innerHTML="تم تجهيز تحديث جديد <button type=\"button\">تحديث الآن</button>";n.querySelector("button").onclick=()=>location.reload();document.body.appendChild(n)}})})}).catch(()=>{});}</script></body>
